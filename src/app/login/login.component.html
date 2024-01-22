@@ -1,0 +1,21 @@
+<div class="right-content">
+    <form>
+        <h2>Welcome</h2>
+        <p>Please enter your login details</p>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" [(ngModel)]="username" required minlength="4"  #name="ngModel" >
+  
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" [(ngModel)]="password">
+  
+      <button type="submit" class="login-box" (click)="onSubmit()">Login</button>
+      <small class="small"><a  routerLink="forgot-password">Forgot password</a></small>
+      
+    </form>
+    <div *ngIf="loginResponse">
+      <p>Login successful!</p>
+     <!---- <pre>{{ loginResponse |json }}</pre>--->
+    </div>
+  </div>
+
+

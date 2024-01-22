@@ -1,0 +1,23 @@
+<table *ngFor="let post of posts">
+    <tr>
+    <th>Title</th>
+    <th>Body</th>
+    <th><a [routerLink]="['/news/', post.id]">Read More</a></th>
+    </tr>
+    <tr>
+        <td>{{post?.title}}</td>
+        <td>{{post?.body}}</td>
+        <td>{{post.id}}</td>
+     </tr>
+</table>
+
+
+<!---<div *ngFor="let post of posts">
+    <h3>{{post?.title}}</h3>
+    <div>
+        {{post?.body}}
+    </div>
+    <div>
+        <a [routerLink]="['/news/', post.id]">Read More</a>
+    </div>
+</div>-->

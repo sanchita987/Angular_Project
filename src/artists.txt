@@ -1,0 +1,5 @@
+artists 
+route
+name
+age 
+photo

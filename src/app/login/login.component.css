@@ -1,0 +1,39 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.login-box {
+  background-color: #3498db; /* Blue background color */
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+  text-align: left;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+label, input {
+  display: block;
+  margin-bottom: 10px;
+}
+
+button {
+  color: #fff;
+  padding: 10px 15px,10px, 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 5px;
+}
+.small {
+  color:blue;
+  text-align: left;
+}
