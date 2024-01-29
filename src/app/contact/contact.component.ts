@@ -8,12 +8,12 @@ import { FormArray } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 
-export function forbiddenNameValidator(forbiddenName: string): ValidatorFn {
+/*export function forbiddenNameValidator(forbiddenName: string): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
     const forbidden = control.value === forbiddenName;
     return forbidden ? { 'forbiddenName': { value: control.value } } : null;
   };
-}
+}*/
 
 @Component({
   selector: 'app-contact',
@@ -24,40 +24,46 @@ export function forbiddenNameValidator(forbiddenName: string): ValidatorFn {
 })
 export class ContactComponent {
   contactForm = this.formBuilder.group({
-    name: new FormControl('', [Validators.required, Validators.minLength(4),forbiddenNameValidator('sanchita')] ),
-    email: new FormControl('', Validators.required),
-    address: new FormControl('', Validators.required),
-    mobile_number: new FormControl('', Validators.required),
-    message: new FormControl('', Validators.required), 
-    aliases: this.formBuilder.array([this.formBuilder.control('')]),
+    firstname: new FormControl('', [Validators.required] ),
+    lastname: new FormControl('', [Validators.required] ),
+    email: ['', [Validators.required , Validators.email]],
+    mobile: new FormControl('', Validators.required),
+    phone: new FormControl('', Validators.required),
+    title: new FormControl('', Validators.required), 
   });
-
-  get aliases() {
-    return this.contactForm.get('aliases') as FormArray;
+  get firstname() {
+    return this.contactForm.get('firstname')
   }
-  
-  get name() {
-    return this.contactForm.get('name')
-  }
-  get address() {
-    return this.contactForm.get('address')
+  get lastname() {
+    return this.contactForm.get('lastname')
   }
   get email() {
     return this.contactForm.get('email')
   }
-  get mobile_number() {
-    return this.contactForm.get('mobile_number')
+  get phone() {
+    return this.contactForm.get('phone')
   }
-  get message() {
-    return this.contactForm.get('message')
+  get mobile() {
+    return this.contactForm.get('mobile')
   }
-  addAlias() {
-    this.aliases.push(this.formBuilder.control(''));
+  get title() {
+    return this.contactForm.get('title')
   }
-  onSubmit() {
-    console.log(this.contactForm.value);
-  }
-  constructor(private formBuilder: FormBuilder) {}
 
+  constructor(private formBuilder: FormBuilder) {}
+  onSubmit(): void {
+    if (this.contactForm.valid) {
+      console.log('First Name:', this.contactForm.get('firstname')?.value);
+      console.log('Last Name:', this.contactForm.get('lastname')?.value);
+      console.log('Email:', this.contactForm.get('email')?.value);
+      console.log('Mobile:', this.contactForm.get('mobile')?.value);
+      console.log('Phone:', this.contactForm.get('phone')?.value);
+      console.log('Title:', this.contactForm.get('title')?.value);
+    } else {
+      console.log('Form is not valid. Please check the input values.');
+    }
+  }
+  
   
 }
+ 

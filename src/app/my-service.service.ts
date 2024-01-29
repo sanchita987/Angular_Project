@@ -13,26 +13,55 @@ export class DataService {
 
     return of([
       {
-        title: 'Subjects',
-        body: 'Description',
-        rating: '3.4'
+        title: 'To Kill a Mockingbird',
+        author: 'Harper Lee',
+        rating: '4.3',
       },
       {
-        title: 'The power of subconscious Mind',
-        body: 'Self help book',
-        rating: '7.2'
+        title: '1984',
+        author: 'George Orwell',
+        rating: '4.5',
       },
       {
-        title: 'The power of conscious Mind',
-        body: 'Self help book',
-        rating: '7.2'
+        title: 'The Great Gatsby',
+        author: 'F. Scott Fitzgerald',
+        rating: '4.2',
       },
       {
-        title: 'The power of unconscious Mind',
-        body: 'Self help book',
-        rating: '9.3'
-      }
-
+        title: 'Pride and Prejudice',
+        author: 'Jane Austen',
+        rating: '4.4',
+      },
+      {
+        title: 'The Catcher in the Rye',
+        author: 'J.D. Salinger',
+        rating: '4.0',
+      },
+      {
+        title: 'The Hobbit',
+        author: 'J.R.R. Tolkien',
+        rating: '4.2',
+      },
+      {
+        title: 'To the Lighthouse',
+        author: 'Virginia Woolf',
+        rating: '4.1',
+      },
+      {
+        title: 'The Da Vinci Code',
+        author: 'Dan Brown',
+        rating: '3.8',
+      },
+      {
+        title: 'The Alchemist',
+        author: 'Paulo Coelho',
+        rating: '4.2',
+      },
+      {
+        title: 'The Lord of the Rings',
+        author: 'J.R.R. Tolkien',
+        rating: '4.6',
+      },
     ])
     
   }
@@ -40,6 +69,7 @@ export class DataService {
   getPosts() {
     return this.http.get<any[]>('https://jsonplaceholder.typicode.com/posts');
   }
+ 
 
   getPost(id: number) {
     return this.http.get<any[]>('https://jsonplaceholder.typicode.com/posts/'+id);

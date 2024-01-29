@@ -1,0 +1,78 @@
+<section class="intro">
+  <div class="gradient-custom-1 h-100">
+    <div class="mask d-flex align-items-center h-100">
+      <div class="container">
+        <div class="row">
+          <div class="col-8">
+            <div class="table-responsive bg-white">
+              <table class="table mb-0">
+                <thead>
+                  <h5>Plan summary</h5>
+                  <tr>
+                    <th scope="col">Plan name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let post of posts">
+                    <td>{{post.plan_name}}</td>
+                    <td>{{post.quantity}}</td>
+                    <td>{{post.amount}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+
+            <div class="table-responsive bg-white">
+              <table class="table mb-0">
+                <thead>
+                  <h5>Subscription summary</h5>
+                  <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Signups</th>
+                    <th scope="col">Activation</th>
+                    <th scope="col">cancellations</th>
+                    <th scope="col">Customers</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let post of subs">
+                    <td>{{post.date}}</td>
+                    <td>{{post.signups}}</td>
+                    <td>{{post.activation}}</td>
+                    <td>{{post.cancellations}}</td>
+                    <td>{{post.customers}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title"><b> Statistics</b></h5>
+                <p>total_customers: {{stat.total_customers}}</p>
+                <p>total_Subscriptions: {{stat.total_Subscriptions}}</p>
+                <p>total_products: {{stat.total_products}}</p>
+                <p>total_unpaid_invoices: {{stat.total_unpaid_invoices}}</p>
+              </div>
+            </div>
+            <br>
+              <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title"><b>Sign ups</b></h5>
+                  <p>Today: {{sign.today}}</p>
+                  <p>yesterday: {{sign.yesterday}}</p>
+                  <p>This month: {{sign.this_month}}</p>
+              </div>
+              </div>
+
+          </div>
+          
+        </div>
+        </div>
+      </div>
+    </div>
+</section>

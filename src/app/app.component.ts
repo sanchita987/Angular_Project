@@ -8,12 +8,13 @@ import { ArtistsComponent } from './artists/artists.component';
 import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
+import { RegistrationComponent } from './registration/registration.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, PostsComponent,LoginComponent, BooksComponent,ArtistsComponent,ContactComponent, RouterModule,FormsModule ],
+  imports: [CommonModule, RouterOutlet, PostsComponent,LoginComponent, BooksComponent,ArtistsComponent,ContactComponent, RouterModule,FormsModule, RegistrationComponent ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

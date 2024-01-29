@@ -1,0 +1,493 @@
+<!---<div class="mask d-flex align-items-center h-100 gradient-custom-3">-->
+<!--<div class="container h-100">-->
+<div class="row d-flex justify-content-center align-items-center h-100">
+    <!---- <div class="col-12 col-md-9 col-lg-7 col-xl-6">--->
+    <div class="card" style="border-radius: 15px; width: 70%;">
+        <div class="card-body p-10">
+            <h2 class="text-uppercase text-center mb-5">Create a customer account</h2>
+
+            <form [formGroup]="customer_registerForm">
+                <div *ngIf="errorResponse">
+                    {{errorResponse}}
+                </div>
+                <div class="row">
+                    <div class="form-outline mb-4 col">
+                        <label for="first_Name" class="form-label">First Name</label>
+                        <input type="text" id="first_Name" name="first_Name" class="form-control form-control-lg"
+                            placeholder="Ex: Harry" formControlName="first_name">
+                        <div *ngIf="first_name?.invalid && (first_name?.dirty || first_name?.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="first_name?.errors?.['required']">
+                                First name is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-outline mb-4 col">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input type="text" id="last_Name" name="last_Name" class="form-control form-control-lg"
+                            placeholder="Ex: Potter" formControlName="last_name">
+                        <div *ngIf="last_name?.invalid && (last_name?.dirty || last_name?.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="last_name?.errors?.['required']">
+                                Last name is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-outline mb-4 col">
+                        <label for="customer_type" class="form-label">Customer Type *</label>
+                        <input type="text" id="customer_type" name="customer_type" class="form-control form-control-lg"
+                            placeholder="Ex: 0 or 1" formControlName="customer_type">
+                        <div *ngIf="customer_registerForm.get('customer_type').invalid && 
+                                        (customer_registerForm.get('customer_type').dirty || 
+                                         customer_registerForm.get('customer_type').touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="customer_registerForm.get('customer_type').errors?.['required']">
+                                Customer Type is required.
+                            </div>
+                            <div *ngIf="customer_registerForm.get('customer_type').errors?.['min']">
+                                Customer Type must be at least 0.
+                            </div>
+                            <div *ngIf="customer_registerForm.get('customer_type').errors?.['max']">
+                                Customer Type cannot be greater than 1.
+                            </div>
+                            <div *ngIf="customer_registerForm.get('customer_type').errors?.['pattern']">
+                                Customer Type must be a valid integer.
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-outline mb-4 col">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" name="email" class="form-control form-control-lg"
+                            placeholder="Ex:harry@example.com" formControlName="email">
+                        <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="alert alert-danger">
+                            <div *ngIf="email?.errors?.['required']">
+                                Email is required.
+                            </div>
+                            <div *ngIf="email?.errors?.['email']">
+                                Please enter a valid email address.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-outline mb-4 col">
+                        <label for="mailing_address" class="form-label">Mailing address</label>
+                        <input type="text" id="mailing_address" name="mailing_address"
+                            class="form-control form-control-lg" formControlName="mailing_address">
+                        <div *ngIf="mailing_address?.invalid && (mailing_address?.dirty || mailing_address?.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="mailing_address?.errors?.['required']">
+                                Mailing Address is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-outline mb-4 col">
+                        <label class="form-label" for="form3Example4cdg" name="deposit">Deposit</label>
+                        <input type="number" id="form3Example4cdg" class="form-control form-control-lg"
+                            formControlName="deposit" />
+                        <div *ngIf="deposit?.invalid && (deposit?.dirty || deposit?.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="deposit?.errors?.['required']">
+                                Deposit Amount is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-outline mb-4 col">
+                        <label class="form-label" for="form3Example4cdg" name="zipcode">Zipcode</label>
+                        <input type="number" id="form3Example4cdg" class="form-control form-control-lg"
+                            formControlName="zipcode" />
+                        <div *ngIf="zipcode?.invalid && (zipcode?.dirty || zipcode?.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="zipcode?.errors?.['required']">
+                                Zipcode is required.
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-outline mb-4 col">
+                        <label class="form-label" for="form3Example4cdg" name="phone">Phone</label>
+                        <input type="number" id="form3Example4cdg" class="form-control form-control-lg"
+                            formControlName="phone" />
+                        <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)" class="alert alert-danger">
+                            <div *ngIf="phone?.errors?.['required']">
+                                Phone number is required.
+                            </div>
+                            <div *ngIf="phone?.errors?.['minlength']">
+                                Phone number must be at least 10 characters long.
+                            </div>
+                            <div *ngIf="phone?.errors?.['pattern']">
+                                Phone number must start with '977'.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-outline mb-4 col">
+                        <label class="form-label" for="form3Example4cdg" name="province">Province</label>
+                        <input type="text" id="form3Example4cdg" class="form-control form-control-lg"
+                            formControlName="province" />
+                        <div *ngIf="province?.invalid && (province?.dirty || province?.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="province?.errors?.['required']">
+                                Province is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-outline mb-4 col">
+                        <label class="form-label" for="form3Example4cdg" name="city">City</label>
+                        <input type="text" id="form3Example4cdg" class="form-control form-control-lg"
+                            formControlName="city" />
+                        <div *ngIf="city?.invalid && (city?.dirty || city?.touched)" class="alert alert-danger">
+                            <div *ngIf="city?.errors?.['required']">
+                                City is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-outline mb-4 col">
+                        <label class="form-label" for="form3Example4cdg" name="address">Address</label>
+                        <input type="text" id="form3Example4cdg" class="form-control form-control-lg"
+                            formControlName="address" />
+                        <div *ngIf="address?.invalid && (address?.dirty || address?.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="address?.errors?.['required']">
+                                Address is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-outline mb-4 col">
+                        <label class="form-label" for="form3Example4cdg" name="building">Building</label>
+                        <input type="text" id="form3Example4cdg" class="form-control form-control-lg"
+                            formControlName="building" />
+                        <div *ngIf="building?.invalid && (building?.dirty || building?.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="building?.errors?.['required']">
+                                Building is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-outline mb-4 col">
+                        <label class="form-label" for="form3Example4cdg" name="gender">Select Your gender</label>
+                        <select id="form3Example4cdg" class="form-control form-control-lg" name="gender"
+                            formControlName="gender">
+                            <option selected value="">Select the Gender</option>
+                            <option value="Regular">Male</option>
+                            <option value="New">Female</option>
+                            <option value="New">Others</option>
+                        </select>
+                        <div *ngIf="gender?.invalid && (gender?.dirty || gender?.touched)" class="alert alert-danger">
+                            <div *ngIf="gender?.errors?.['required']">
+                                You must select one of the above option.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-outline mb-4 col">
+                        <label class="form-label" for="form3Example4cdg" name="dob">Date of Birth</label>
+                        <input type="date" id="form3Example4cdg" class="form-control form-control-lg"
+                            formControlName="dob" />
+                        <div *ngIf="dob?.invalid && (dob?.dirty || dob?.touched)" class="alert alert-danger">
+                            <div *ngIf="dob?.errors?.['required']">
+                                DOB is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-outline mb-4 col">
+                        <label for="firstName" class="form-label">Company Representive First Name</label>
+                        <input type="text" id="firstName" name="firstName" class="form-control form-control-lg"
+                            placeholder="Ex: Harry" formControlName="first_name">
+                        <div *ngIf="first_name?.invalid && (first_name?.dirty || first_name?.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="first_name?.errors?.['required']">
+                                Company Representive first name is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-outline mb-4 col">
+                        <label for="lastName" class="form-label">Company Representive Last Name</label>
+                        <input type="text" id="lastName" name="lastName" class="form-control form-control-lg"
+                            placeholder="Ex: Potter" formControlName="last_name">
+                        <div *ngIf="last_name?.invalid && (last_name?.dirty || last_name?.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="last_name?.errors?.['required']">
+                                Company Representive last name is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-outline mb-4 col">
+                        <label class="form-label" for="form3Example1cg" name="company"> Company</label>
+                        <input type="text" id="form3Example1cg" class="form-control form-control-lg"
+                            formControlName="company" />
+                        <div *ngIf="company?.invalid && (company?.dirty || company?.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="company?.errors?.['required']">
+                                Company name is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-outline mb-4 col">
+                        <label class="form-label" for="form3Example1cg" name="whatsapp"> Whatsapp</label>
+                        <input type="text" id="form3Example1cg" class="form-control form-control-lg"
+                            formControlName="whatsapp" />
+                        <div *ngIf="whatsapp?.invalid && (whatsapp?.dirty || whatsapp?.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="whatsapp?.errors?.['required']">
+                                Whatsapp id is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-outline mb-4 col">
+                        <label class="form-label" for="form3Example1cg" name="facebook"> Facebook</label>
+                        <input type="text" id="form3Example1cg" class="form-control form-control-lg"
+                            formControlName="facebook" />
+                        <div *ngIf="facebook?.invalid && (facebook?.dirty ||facebook?.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="facebook?.errors?.['required']">
+                                Facebook id is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-outline mb-4 col">
+                        <label class="form-label" for="form3Example1cg" name="profession">
+                            Profession</label>
+                        <input type="text" id="form3Example1cg" class="form-control form-control-lg"
+                            formControlName="profession" />
+                        <div *ngIf="profession?.invalid && (profession?.dirty ||profession?.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="profession?.errors?.['required']">
+                                Profession is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-outline mb-4 col">
+                        <label for="firstName" class="form-label">Emergency Contact Name</label>
+                        <input type="text" id="firstName" name="firstName" class="form-control form-control-lg"
+                            placeholder="Ex: Harry" formControlName="first_name">
+                        <div *ngIf="first_name?.invalid && (first_name?.dirty || first_name?.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="first_name?.errors?.['required']">
+                                Emergency Contact name is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-outline mb-4 col">
+                        <label class="form-label" for="form3Example4cdg" name="phone">Emergency Contact
+                            phone</label>
+                        <input type="number" id="form3Example4cdg" class="form-control form-control-lg"
+                            formControlName="phone" />
+                        <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)" class="alert alert-danger">
+                            <div *ngIf="phone?.errors?.['required']">
+                                Emergency contact phone is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-outline mb-4 col">
+                        <label class="form-label" for="form3Example4cdg" name="date">Registration
+                            Date</label>
+                        <input type="date" id="form3Example4cdg" class="form-control form-control-lg"
+                            formControlName="date" />
+                        <div *ngIf="date?.invalid && (date?.dirty || date?.touched)" class="alert alert-danger">
+                            <div *ngIf="date?.errors?.['required']">
+                                Registration date is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-outline mb-4 col">
+                        <label class="form-label" for="form3Example1cg" name="nationality">
+                            Nationality</label>
+                        <input type="text" id="form3Example1cg" class="form-control form-control-lg"
+                            formControlName="nationality" />
+                        <div *ngIf="nationality?.invalid && (nationality?.dirty ||nationality?.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="nationality?.errors?.['required']">
+                                Nationality id is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-outline mb-4 col">
+                        <label class="form-label" for="form3Example1cg" name="details">
+                            Details</label>
+                        <input type="text" id="form3Example1cg" class="form-control form-control-lg"
+                            formControlName="details" />
+                        <div *ngIf="details?.invalid && (details?.dirty ||details?.touched)" class="alert alert-danger">
+                            <div *ngIf="details?.errors?.['required']">
+                                Details is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-outline mb-4 col">
+                        <label class="form-label" for="form3Example1cg" name="residence_card _number">
+                            Residence Card Number</label>
+                        <input type="number" id="form3Example1cg" class="form-control form-control-lg"
+                            formControlName="residence_card_number" />
+                        <div *ngIf="residence_card_number?.invalid && (residence_card_number?.dirty ||residence_card_number?.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="residence_card_number?.errors?.['required']">
+                                Residence Card Number is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-outline mb-4 col">
+                        <label class="form-label" for="form3Example1cg" name="residence_card _number">
+                            Select residence card status</label>
+                        <select id="form3Example1cg" class="form-control form-control-lg"
+                            aria-label="form-select-lg example" name="residence_card_status"
+                            formControlName="residence_card_status">
+                            <option selected value="">Select Card Status</option>
+                            <option value="Regular">Avtive</option>
+                            <option value="New">Inactive</option>
+                        </select>
+                        <div *ngIf="residence_card_status?.invalid && (residence_card_status?.dirty ||residence_card_status?.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="residence_card_status?.errors?.['required']">
+                                You must select one of the above option.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-outline mb-4 col">
+                        <label class="form-label" for="form3Example1cg" name="residence_card_front">
+                            Residence Card Front</label>
+                        <input type="file" id="form3Example1cg" class="form-control form-control-lg"
+                            formControlName="residence_card_front" (change)="onFileSelected($event)" />
+                            <img *ngIf="selectedFile" [src]="selectedFile" alt="Preview" class="img-preview" />
+                    </div>
+                </div>
+
+                    <div class="row">
+                        <div class="form-outline mb-4 col">
+                            <label class="form-label" for="form3Example1cg" name="residence_card _back">
+                                Residence Card Back</label>
+                            <input type="file" id="form3Example1cg" class="form-control form-control-lg"
+                                formControlName="residence_card_back" />
+                        </div>
+                        <div class="form-outline mb-4 col">
+                            <label class="form-label" for="form3Example1cg" name="company_doc">
+                                Company Document Front</label>
+                            <input type="file" id="form3Example1cg" class="form-control form-control-lg"
+                                formControlName="company_doc" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-outline mb-4 col">
+                            <label class="form-label" for="form3Example4cdg" name="phone">Smart Pit number</label>
+                            <input type="number" id="form3Example4cdg" class="form-control form-control-lg"
+                                formControlName="smartpit_no" />
+                            <div *ngIf="smartpit_no?.invalid && (smartpit_no?.dirty || smartpit_no?.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="smartpit_no?.errors?.['required']">
+                                    Smart Pit number is required.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-outline mb-4 col">
+                            <label class="form-label" for="form3Example1cg" name="bankautoid_telecom"> BankAuto id
+                                telecom</label>
+                            <input type="text" id="form3Example1cg" class="form-control form-control-lg"
+                                formControlName="bankautoid_telecom" />
+                            <div *ngIf="bankautoid_telecom?.invalid && (bankautoid_telecom?.dirty ||bankautoid_telecom?.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="bankautoid_telecom?.errors?.['required']">
+                                    BankAuto id telecom is required.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-outline mb-4 col">
+                            <label class="form-label" for="form3Example1cg" name="bankauto_veritrans"> BankAuto
+                                veritrans</label>
+                            <input type="text" id="form3Example1cg" class="form-control form-control-lg"
+                                formControlName="bankauto_veritrans" />
+                            <div *ngIf="bankauto_veritrans?.invalid && (bankauto_veritrans?.dirty ||bankauto_veritrans?.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="bankauto_veritrans?.errors?.['required']">
+                                    BankAuto veritrans is required.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-outline mb-4 col">
+                            <label class="form-label" for="form3Example1cg" name="referer"> Referer</label>
+                            <input type="text" id="form3Example1cg" class="form-control form-control-lg"
+                                formControlName="referer" />
+                            <div *ngIf="referer?.invalid && (referer?.dirty ||referer?.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="referer?.errors?.['required']">
+                                    Referer is required.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-outline mb-4 col">
+                            <label class="form-label" for="form3Example4cdg" name="contacts">Contacts
+                            </label>
+                            <input type="number" id="form3Example4cdg" class="form-control form-control-lg"
+                                formControlName="contacts" />
+                            <div *ngIf="contacts?.invalid && (contacts?.dirty || contacts?.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="contacts?.errors?.['required']">
+                                    Contact is required.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-outline mb-4 col">
+                            <label class="form-label" for="form3Example4cdg" name="dob">Period of stay</label>
+                            <input type="date" id="form3Example4cdg" class="form-control form-control-lg"
+                                formControlName="period_of_stay" />
+                            <div *ngIf="period_of_stay?.invalid && (period_of_stay?.dirty || period_of_stay?.touched)" class="alert alert-danger">
+                                <div *ngIf="period_of_stay?.errors?.['required']">
+                                    Period of stay is required is required.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-outline mb-4 col">
+                        <label class="form-label">Description</label>
+                        <textarea id="description" name="description" rows="4" class="form-control form-control-lg"
+                            placeholder="Write your message..." formControlName="description"></textarea>
+                        <div *ngIf="description?.invalid && (description?.dirty ||description?.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="description?.errors?.['required']">
+                                Please enter a message.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-primary btn-lg btn-block" (click)="onregister()"
+                            [disabled]="!customer_registerForm.valid">Register</button>
+                    </div>
+
+                    <div *ngIf="customer_registerResponse" class="alert alert-success">
+                        Registration successful!
+                    </div>
+
+                
+            </form>
+        </div>
+        </div>
+        </div>

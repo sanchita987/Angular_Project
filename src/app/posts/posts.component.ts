@@ -13,9 +13,13 @@ import { RouterModule } from '@angular/router';
 })
 export class PostsComponent {
   posts:any;
+
   constructor(private data: DataService) {
     this.data.getPosts().subscribe(data=>{
       this.posts = data;
     })
-  }
+  
+
 }
+}
+

@@ -8,16 +8,14 @@ import { Observable } from "rxjs";
   providedIn: 'root'
 })
 export class LoginService {
-  private loginUrl = 'https://jsonplaceholder.typicode.com/posts';
+  private loginUrl = 'https://nitvcrmapi.truestreamz.com/api/v1/user/login';
 
   constructor(private http: HttpClient) {}
 
-  login(username: string, password: string): Observable<any> {
-    const credentials = {
-      username: username,
-      password: password,
-    };
-
-    return this.http.post<any>(this.loginUrl, credentials);
+  login(data: any): Observable<any> {
+    let formData = new FormData();
+    formData.append('username', data.email)
+    formData.append('password', data.password)
+    return this.http.post(this.loginUrl, formData);
   }
 }

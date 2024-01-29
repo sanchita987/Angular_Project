@@ -1,10 +1,9 @@
-<body>
+<!---<body>
     <form [formGroup] = "contactForm" class=" left-content" (ngSubmit)="onSubmit()">
     <label for="name">Name:</label>
     <input type="text" id="name" class="form-control" formControlName="name"  required>
     
-    <div *ngIf="name?.invalid && (name?.dirty || name?.touched)"
-    class="alert alert-danger">
+  <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="alert alert-danger">
   <div *ngIf="name?.errors?.['required']">
     Name is required.
   </div>
@@ -67,5 +66,88 @@
     
   </form>
 
-</body>
+</body>--->
+
+<div class="mask d-flex align-items-center h-100 gradient-custom-3">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+        <div class="card" style="border-radius: 15px;">
+          <div class="card-body p-5">
+            <h2 class="text-uppercase text-center mb-5">Contact Form</h2>
+            <form [formGroup] = "contactForm" >
+              <div class="form-outline mb-4">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" id="firstName" name="firstName" class="form-control form-control-lg" placeholder="Ex: Harry" formControlName="firstname"  >
+                    <div *ngIf="firstname?.invalid && (firstname?.dirty || firstname?.touched)" class="alert alert-danger">
+                      <div *ngIf="firstname?.errors?.['required']">
+                       First name is required.
+                      </div>
+                      </div>
+                </div>
+                <div class="form-outline mb-4">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" class="form-control form-control-lg" placeholder="Ex: Potter" formControlName="lastname"  >
+                   <div *ngIf="lastname?.invalid && (lastname?.dirty || lastname?.touched)" class="alert alert-danger">
+                    <div *ngIf="lastname?.errors?.['required']">
+                    Last name is required.
+                    </div>
+                    </div>
+                    </div>
+
+            <div class="form-outline mb-4">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" name="email" class="form-control form-control-lg"placeholder="Ex:harry@example.com" formControlName="email"  >
+                <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="alert alert-danger">
+                  <div *ngIf="email?.errors?.['required']">
+                  Email is required.
+                  </div>
+                  <div *ngIf="email?.errors?.['email']">
+                    Please enter a valid email address.
+                  </div>
+                 </div>
+              </div>
+
+
+            <div class="form-outline mb-4">
+                <label for="mobile" class="form-label">Mobile</label>
+                <input type="number" id="mobile" name="mobile" class="form-control form-control-lg"placeholder="Mobile number" formControlName="mobile" >
+                <div *ngIf="mobile?.invalid && (mobile?.dirty || mobile?.touched)" class="alert alert-danger">
+                  <div *ngIf="mobile?.errors?.['required']">
+                  Mobile number is required  is required.
+                  </div>
+                  </div>
+            </div>
+
+            <div class="form-outline mb-4">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="number" id="phone" name="phone" class="form-control form-control-lg" placeholder="Phone number" formControlName="phone"  >
+                <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)" class="alert alert-danger">
+                  <div *ngIf="phone?.errors?.['required']">
+                   Phone number is required.
+                  </div>
+                  </div>
+            </div>
+
+            <div class="form-outline mb-4">
+                <label for="message" class="form-label">Message</label>
+                <textarea id="message" name="message" rows="4"class="form-control form-control-lg" placeholder="Write your message..." formControlName="title"  ></textarea>
+                <div *ngIf="title?.invalid && (title?.dirty ||title?.touched)" class="alert alert-danger">
+                  <div *ngIf="title?.errors?.['required']">
+                   Please enter a message.
+                  </div>
+                  </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="!contactForm.valid" (click)="onSubmit()">Submit</button>
+        </form>
+          </div>
+          </div>
+          </div>
+    </div>
+  </div>
+</div>
+
+
+
 

@@ -1,4 +1,4 @@
-<div class="row">
+<!---<div class="row">
     <h3>Books</h3>
     <table>
       <tr>
@@ -12,4 +12,35 @@
         <td>{{post.rating}}</td>
       </tr>
     </table>
-  </div>
+  </div>-->
+  <section class="intro">
+    <div class="gradient-custom-1 h-100">
+      <div class="mask d-flex align-items-center h-100">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <div class="table-responsive bg-white">
+                <table class="table mb-0">
+                  <thead>
+                    <tr>
+                      <th scope="col">Title</th>
+                      <th scope="col">Author</th>
+                      <th scope="col">Rating</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let post of posts">
+                     <!---- <th scope="row" style="color: #666666;">Tiger Nixon</th>-->
+                      <td>{{post.title}}</td>
+                      <td>{{post.author}}</td>
+                      <td>{{post.rating}}</td>
+                      </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
