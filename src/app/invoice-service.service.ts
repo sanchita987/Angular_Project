@@ -7,11 +7,17 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class InvoiceServiceService {
+
   constructor(private http: HttpClient) { }
-  getInvoice() {
+
+  getInvoice(data: any) {
     let headers = new HttpHeaders();
+    let customer_id = 0;
+    if(data.customer_id){
+      customer_id = data.customer_id
+    }
     headers = headers.append('Authorization', 'bearer ' + localStorage.getItem('access_token'));
-    return this.http.get<any[]>('https://nitvcrmapi.truestreamz.com/api/v1/invoice', {
+    return this.http.get<any[]>('https://nitvcrmapi.truestreamz.com/api/v1/invoice?customer_id='+customer_id, {
       headers
     });
   }

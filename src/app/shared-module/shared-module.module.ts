@@ -6,8 +6,6 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 
-
-
 @NgModule({
   declarations: [],
   imports: [

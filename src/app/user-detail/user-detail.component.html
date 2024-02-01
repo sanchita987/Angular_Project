@@ -4,16 +4,19 @@
             <h5 class="card-title"><b> User Details</b></h5>
 
 
-            <p>Id:{{users.id}}</p>
-            <p>User Type:{{users.user_type}}</p>
-            <p> Name:{{users.name}}</p>
-            <p> Customer number{{users.customer_number}}</p>
-            <p> Company:{{users.last_name}}</p>
-            <p>Email{{users.email}}</p>
-            <p> Phone:{{users.phone}}</p>
-            <p>Address:{{users.address}}</p>
-            <p> Last login ip:{{users.last_login_ip}}</p>
-            <p>Is Active:{{users.is_active}}</p>
+            <div class="container">
+                <p class="mb-2"><strong>Id:</strong> {{ users.id }}</p>
+                <p class="mb-2"><strong>User Type:</strong> {{ users.user_type }}</p>
+                <p class="mb-2"><strong>Name:</strong> {{ users.name }}</p>
+                <p class="mb-2"><strong>Customer Number:</strong> {{ users.customer_number }}</p>
+                <p class="mb-2"><strong>Company:</strong> {{ users.last_name }}</p>
+                <p class="mb-2"><strong>Email:</strong> {{ users.email }}</p>
+                <p class="mb-2"><strong>Phone:</strong> {{ users.phone }}</p>
+                <p class="mb-2"><strong>Address:</strong> {{ users.address }}</p>
+                <p class="mb-2"><strong>Last Login IP:</strong> {{ users.last_login_ip }}</p>
+                <p class="mb-2"><strong>Is Active:</strong> {{ users.is_active }}</p>
+              </div>
+              
         </div>
     </div>
     <a routerLink="/admin/user" class="btn btn-info">Back</a>

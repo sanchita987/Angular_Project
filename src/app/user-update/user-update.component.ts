@@ -75,24 +75,7 @@ export class UserUpdateComponent {
     );
   }
   
-   /* this.userserviceservice.register(this.registerForm.value)
-      .subscribe(
-        (response) => {
-
-          this.registerResponse = response;
-
-          console.log('Register successful:', response);
-
-        },
-        (error) => {
-
-          this.errorResponse = "Error"
-
-          this.registerResponse = Response;
-        }
-      );*/
-  
-  get name() {
+   get name() {
     return this.registerForm.get('name')
   }
   get company() {

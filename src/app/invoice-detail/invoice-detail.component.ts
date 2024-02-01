@@ -11,6 +11,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
   styleUrl: './invoice-detail.component.css'
 })
 export class InvoiceDetailComponent {
+  charges: any[] = [];
   invoice: any = {
     data: []
   };
@@ -22,6 +23,7 @@ export class InvoiceDetailComponent {
       this.data.getInvoices(data['id']).subscribe((response: any) => {
         console.log(response, "response")
         this.invoice= response['data'];
+        this.charges = this.invoice.charges;
       })
     })
   }

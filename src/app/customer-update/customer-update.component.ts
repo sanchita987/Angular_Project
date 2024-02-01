@@ -22,7 +22,7 @@ export class CustomerUpdateComponent {
   customer_registerResponse: any = null;
   errorResponse: any = '';
   customer_id: any;
-  
+
 
 
   constructor(private data: CustomerService, private route: ActivatedRoute,
@@ -60,24 +60,24 @@ export class CustomerUpdateComponent {
       contacts: [''],
       description: [''],
       period_of_stay: [''],
-      residence_card_front: [''], 
+      residence_card_front: [''],
       residence_card_back: [''],
       company_doc: [''],
     });
   }
 
-   ngOnInit() {
+  ngOnInit() {
     this.route.params.subscribe(data => {
       this.customer_id = data['id']
       this.data.getCustomer(data['id']).subscribe((response: any) => {
         console.log(response, "response");
-        
+
         this.customer_registerForm.patchValue(response['data']);
         this.customer = response['data'];
       });
     });
   }
-  id: number =  0;
+  //id: number = 0;
 
   onupdate(): void {
     console.log(this.customer_registerForm.value);
@@ -85,7 +85,7 @@ export class CustomerUpdateComponent {
       return;
     }
 
-    const customerId = this.id;
+    this.updateCustomer();
     // this.updateCustomer(customerId, this.customer_registerForm.value);
   }
 
@@ -102,99 +102,129 @@ export class CustomerUpdateComponent {
       }
     );
   }
-  
 
   get email() {
     return this.customer_registerForm.get('email');
   }
+
   get first_name() {
     return this.customer_registerForm.get('first_name');
   }
+
   get last_name() {
     return this.customer_registerForm.get('last_name');
   }
+
   get customer_type() {
     return this.customer_registerForm.get('customer_type');
   }
+
   get mailing_address() {
     return this.customer_registerForm.get('mailing_address');
   }
+
   get deposit() {
     return this.customer_registerForm.get('deposit');
   }
+
   get zipcode() {
     return this.customer_registerForm.get('zipcode');
   }
+
   get details() {
     return this.customer_registerForm.get('details');
   }
+
   get phone() {
     return this.customer_registerForm.get('phone');
   }
+
   get province() {
     return this.customer_registerForm.get('province');
   }
+
   get city() {
     return this.customer_registerForm.get('city');
   }
+
   get address() {
     return this.customer_registerForm.get('address');
   }
+
   get building() {
     return this.customer_registerForm.get('building');
   }
+
   get gender() {
     return this.customer_registerForm.get('gender');
   }
+
   get dob() {
     return this.customer_registerForm.get('dob');
   }
+
   get company() {
     return this.customer_registerForm.get('company');
   }
+
   get whatsapp() {
     return this.customer_registerForm.get('whatsapp');
   }
+
   get facebook() {
     return this.customer_registerForm.get('facebook');
   }
+
   get profession() {
     return this.customer_registerForm.get('profession');
   }
+
   get date() {
     return this.customer_registerForm.get('date');
   }
+
   get nationality() {
     return this.customer_registerForm.get('nationality');
   }
+
   get residence_card_number() {
     return this.customer_registerForm.get('residence_card_number');
   }
+
   get residence_card_status() {
     return this.customer_registerForm.get('residence_card_status');
   }
+
   get company_doc() {
     return this.customer_registerForm.get('company_doc');
   }
+
   get smartpit_no() {
     return this.customer_registerForm.get('smartpit_no');
   }
+
   get bankautoid_telecom() {
     return this.customer_registerForm.get('bankautoid_telecom');
   }
+
   get bankauto_veritrans() {
     return this.customer_registerForm.get('bankauto_veritrans');
   }
+
   get referer() {
     return this.customer_registerForm.get('referer');
   }
+
   get contacts() {
     return this.customer_registerForm.get('contacts');
   }
+
   get description() {
     return this.customer_registerForm.get('description');
   }
+
   get period_of_stay() {
     return this.customer_registerForm.get('period_of_stay');
   }
+
 }

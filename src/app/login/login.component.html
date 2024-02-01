@@ -5,15 +5,16 @@
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
         <div class="card shadow-2-strong" style="border-radius: 1rem;">
           <div class="card-body p-5 text-center">
+            <h5 class="mb-5 custom-heading">Login</h5>
 
-            <h3 class="mb-5">Log in</h3>
+
 
             <form [formGroup]="loginForm">
               <div *ngIf="errorResponse" class="alert alert-danger">
                 {{errorResponse}}
               </div>
               <div class="form-outline mb-4">
-                <label class="form-label" for="typeEmailX-2">Email</label>
+                <label class="form-label ml-25" for="typeEmailX-2"><i class="fa fa-user" aria-hidden="true"></i>Email</label>
                 <input type="email" id="typeEmailX-2" class="form-control form-control-lg" name="email"
                   formControlName="email">
                 <div
@@ -30,7 +31,7 @@
 
 
               <div class="form-outline mb-4">
-                <label class="form-label" for="typePasswordX-2">Password</label>
+                <label class="form-label" for="typePasswordX-2"><i class="fa fa-key" aria-hidden="true"></i>Password</label>
                 <input type="password" id="typePasswordX-2" class="form-control form-control-lg" name="password"
                   formControlName="password">
                 <div
@@ -47,7 +48,7 @@
 
 
               <button class="btn btn-primary btn-lg btn-block" type="submit" [disabled]="!loginForm.valid"
-                (click)="onSubmit()">Login</button>
+                (click)="onSubmit()">Login <i class="fa fa-sign-in" aria-hidden="true"></i></button>
               <small class="small"><a [routerLink]="['/forgot-password/']">Forgot password</a></small>
             </form>
 

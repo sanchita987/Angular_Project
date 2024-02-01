@@ -15,7 +15,7 @@ export class InvoiceComponent {
     data:[]
   };
   constructor(private data: InvoiceServiceService, private InvoiceService: InvoiceServiceService) {
-    this.data.getInvoice().subscribe((response: any)=>{
+    this.data.getInvoice({}).subscribe((response: any)=>{
       console.log(response, "response")
       this.invoice = response['data'];
     })

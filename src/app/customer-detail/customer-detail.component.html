@@ -1,21 +1,164 @@
-<div class="col-4">
-    <div class="card" style="width: 18rem;">
+<div class="row mt-20">
+  <div class="col-4 ml-3 mr-3">
+    <div class="card">
       <div class="card-body">
         <h5 class="card-title"><b> Customer Details</b></h5>
 
-       
-           <p>Id:{{customer.id}}</p>
-           <p>Email:{{customer.email}}</p>
-           <p> Customer number:{{customer.customer_number}}</p>
-           <p> First name:{{customer.first_name}}</p>
-           <p> Last name{{customer.last_name}}</p> 
-           <p>Phone:{{customer.phone}}</p>
-           <p> company:{{customer.company}}</p> 
-           <p>Total due amount:{{customer.total_due_amount}}</p>
-           <p> Excess credit:{{customer.excess_credit}}</p>
-           <p>Is Active:{{customer.is_active}}</p>
-        </div>
-        <a routerLink="/admin/customer" class="btn btn-info">Back</a>
+
+        <p class="mb-2"><strong>Id:</strong> {{ customer.id }}</p>
+        <p class="mb-2"><strong>Email:</strong> {{ customer.email }}</p>
+        <p class="mb-2"><strong>Customer Number:</strong> {{ customer.customer_number }}</p>
+        <p class="mb-2"><strong>First Name:</strong> {{ customer.first_name }}</p>
+        <p class="mb-2"><strong>Last Name:</strong> {{ customer.last_name }}</p>
+        <p class="mb-2"><strong>Phone:</strong> {{ customer.phone }}</p>
+        <p class="mb-2"><strong>Company:</strong> {{ customer.company }}</p>
+        <p class="mb-2"><strong>Total Due Amount:</strong> {{ customer.total_due_amount }}</p>
+        <p class="mb-2"><strong>Excess Credit:</strong> {{ customer.excess_credit }}</p>
+        <p class="mb-2"><strong>Is Active:</strong> {{ customer.is_active }}</p>
+      </div>
     </div>
+    <h3 class="mb-3 mt-3"><strong>Contact lists</strong></h3>
+    <div class="table-responsive">
+    <table class="table  table-bordered">
+      <tr>
+        <th scope="col">Email</th>
+        <th scope="col">Title</th>
+        <th scope="col">Phone</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Mobile</th>
+        <th scope="col">Action</th>
 
 
+      </tr>
+      <tr *ngFor="let contact of customer.contacts">
+        <td>{{contact.email}}</td>
+        <td>{{contact.title}}</td>
+        <td>{{contact.phone}}</td>
+        <td>{{contact.first_name}}</td>
+        <td>{{contact.last_name}}</td>
+        <td>{{contact.mobile}}</td>
+        <td>
+   <!--     <a [routerLink]="['/admin/customer/',post.id, 'update']" class="btn btn-info">Edit</a>--->  
+        </td>
+    </tr>
+    </table>
+  </div>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-info mb-5" data-toggle="modal" data-target="#exampleModalLong">
+      Add new Contact
+    </button>
+    <!------Modal for new contact-->
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Create Contact</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="contactForm">
+              <div class="form-outline mb-4 col">
+                <label class="form-label" for="first_name" name="first-name">First name</label>
+                <input type="text" id="first_name" class="form-control form-control-lg" formControlName="first_name" />
+                <div
+                  *ngIf="contactForm.controls['first_name'].invalid && (contactForm.controls['first_name'].dirty || contactForm.controls['first_name'].touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="contactForm.controls['first_name'].errors?.['required']">
+                    First name is required.
+                  </div>
+                </div>
+              </div>
+              <div class="form-outline mb-4 col">
+                <label class="form-label" for="last_name" name="last_name">Last name</label>
+                <input type="text" id="last_name" class="form-control form-control-lg" formControlName="last_name" />
+              </div>
+              <div class="form-outline mb-4 col">
+                <label class="form-label" for="email" name="email">Email</label>
+                <input type="email" id="email" class="form-control form-control-lg" formControlName="email" />
+                <div
+                  *ngIf="contactForm.controls['email'].invalid && (contactForm.controls['email'].dirty || contactForm.controls['email'].touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="contactForm.controls['email'].errors?.['required']">
+                    Email is required.
+                  </div>
+                </div>
+              </div>
+              <div class="form-outline mb-4 col">
+                <label class="form-label" for="phone" name="phone">Phone</label>
+                <input type="number" id="phone" class="form-control form-control-lg" formControlName="phone" />
+              </div>
+              <div class="form-outline mb-4 col">
+                <label class="mobile" for="mobile" name="mobile">Mobile</label>
+                <input type="number" id="mobile" class="form-control form-control-lg" formControlName="mobile" />
+              </div>
+              <div class="form-outline mb-4 col">
+                <label class="form-label" for="title" name="title">Title</label>
+                <input type="title" id="title" class="form-control form-control-lg" formControlName="title" />
+              </div>
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="save()">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h3 class="mb-3"><strong>Cards</strong></h3>
+    <table class="table table-striped table-bordered">
+      <tr>
+        <th scope="col">Brand</th>
+        <th scope="col">Expiry Month</th>
+        <th scope="col">Expiry year</th>
+      </tr>
+      <tr *ngFor="let contact of customer.cards">
+        <td>{{contact.brand}}</td>
+        <td>{{contact.exp_month}}</td>
+        <td>{{contact.exp_year}}</td>
+      </tr>
+    </table>
+
+
+  </div>
+  <div class="col-7">
+    <table class="table  table-striped table-responsive">
+      <thead>
+
+
+        <tr>
+          <th scope="col">Url</th>
+          <th scope="col">Number</th>
+          <th scope="col">Comments</th>
+          <th scope="col">Subscription id</th>
+
+          <th scope="col">Status</th>
+          <th scope="col">Invoice Date</th>
+          <th scope="col">Invoice Due Date</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let post of invoices.items">
+          <td>{{post.url}}</td>
+          <td>{{post.number}}</td>
+          <td>{{post.comments}}</td>
+          <td>{{post.subscription_id}}</td>
+
+          <td>{{post.status_description}}</td>
+          <td>{{post.invoice_date}}</td>
+          <td>{{post.invoice_due_date}}</td>
+          <td>
+            <a [routerLink]="['/admin/invoice', post.id]" class="btn btn-info">Detail</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<a routerLink="/admin/customer" class="btn btn-info" style="position: sticky; bottom: 0;">Back</a>
