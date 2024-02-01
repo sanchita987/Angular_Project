@@ -17,10 +17,12 @@
                     <option value="Admin">Admin</option>
                     <option value="SuperAdmin">Sub Admin</option>
                   </select>
+                  <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="alert alert-danger">
                     <div *ngIf="name?.errors?.['required']">
                     You must select one of the above option.
                     </div>
-                    </div>             
+                    </div> 
+                    </div>            
 
                 <div class="form-outline mb-4">
                   <label class="form-label" for="form3Example1cg" name ="name"> Name</label>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -10,4 +10,12 @@ import { RouterModule } from '@angular/router';
 })
 export class AdminComponent {
 
+  constructor(private router: Router) {}
+  
+  logout() {
+    localStorage.removeItem('access_token');
+    this.router.navigate(['login'])
+  }
+
+  
 }

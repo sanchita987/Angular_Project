@@ -8,24 +8,43 @@ import { ReactiveFormsModule } from '@angular/forms';
   providedIn: 'root'
 })
 export class CustomerService {
-  constructor(private http: HttpClient) { }
-
-  getcustomers() {
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', 'bearer ' + localStorage.getItem('access_token'));
-    return this.http.get<any[]>('https://nitvcrmapi.truestreamz.com/api/v1/customer?page=50', {
-      headers
-    });
-  }
-  getcustomer(id: number) {
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', 'bearer ' + localStorage.getItem('access_token'));
-    return this.http.get<any>('https://nitvcrmapi.truestreamz.com/api/v1/customer/' + id, {
-      headers
-    });
-  }
+  private apiUrl = 'https://nitvcrmapi.truestreamz.com/api/v1/customer';
   private registerUrl = 'https://nitvcrmapi.truestreamz.com/api/v1/customer/register';
-  register(data:any): Observable<any> {
+
+  constructor(private http: HttpClient) { }
+  getCustomers(page: number): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
+
+    const url = `${this.apiUrl}?page=${page}`;
+
+    return this.http.get<any>(url, { headers });
+  }
+
+
+  updateCustomer(id: number, updatedData: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+    });
+  
+    const url = `https://nitvcrmapi.truestreamz.com/api/v1/customer/${id}`;
+    return this.http.put<any>(url, updatedData, { headers });
+  }
+  
+
+  getCustomer(id: number): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
+
+    const url = `${this.apiUrl}/${id}`;
+
+    return this.http.get<any>(url, { headers });
+  }
+  
+
+
+
+ /* register(data: any): Observable<any> {
     let headers = new HttpHeaders();
     let fd = new FormData()
     fd.append('email', data['email'])
@@ -33,19 +52,21 @@ export class CustomerService {
     fd.append('last_name', data['last_name'])
     fd.append('customer_type', data['customer_type'])
     fd.append('details', data['details'])
-    headers = headers.append('Authorization', 'bearer ' + localStorage.getItem('access_token'));
-    return this.http.post(this.registerUrl, fd, {
-      headers
+    headers = headers.append('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
+
+    return this.http.post(this.registerUrl, fd, { headers });
+  }*/
+  register(data: any) {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('access_token')
     });
+
+    let fd = new FormData;
+    fd.append('first_name', data.first_name)
+    fd.append('last_name', data.last_name)
+    fd.append('email', data.email)
+    fd.append('customer_type', data.customer_type)
+    return this.http.post('https://nitvcrmapi.truestreamz.com/api/v1/customer/register', fd,{headers});
   }
+
 }
-
-
-  
-  
-
-
- 
-
-
-

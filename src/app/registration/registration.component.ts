@@ -95,33 +95,7 @@ export class RegistrationComponent {
   
 
 }
-/*export class RegistrationComponent {registerForm = this.formBuilder.group({
-  name: new FormControl('', Validators.required, ),
-  email: new FormControl('', Validators.required),
-  address: new FormControl('', Validators.required),
-  phone: new FormControl('', Validators.required),
-});
 
-get name() {
-  return this.registerForm.get('name')
-}
-get address() {
-  return this.registerForm.get('address')
-}
-get email() {
-  return this.registerForm.get('email')
-}
-get phone() {
-  return this.registerForm.get('phone')
-}
-onSubmit() {
-  console.log(this.registerForm.value);
-}
-constructor(private formBuilder: FormBuilder) {}
-
-
-
-}*/
 
 
  

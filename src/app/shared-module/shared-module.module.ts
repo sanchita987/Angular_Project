@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DataService } from '../my-service.service';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { FormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -11,7 +12,7 @@ import { FormsModule } from '@angular/forms';
   declarations: [],
   imports: [
     CommonModule,
-    HttpClientModule, FormsModule
+    HttpClientModule, FormsModule, NgxPaginationModule
   ],
   providers:[DataService]
 })

@@ -1,44 +1,49 @@
-<div class="row">
-    <div class="col-12">
-        <div class="table-responsive bg-white">
-      
-            <table class="table mb-0">
-              <thead>
-                <h5><b>User Details</b></h5>
-                <tr>
-                  <th scope="col">Id</th>
-                  <th scope="col">User Type</th>
-                  <th scope="col"> Name</th>
-                  <th scope="col">Customer number</th>
-                  <th scope="col">Company</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Phone</th>
-                  <th scope="col">Address</th>
-                  <th scope="col">Last login ip</th>
-                  <th scope="col">Is Active</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let post of user['items']">
-                  <td>{{post.id}}</td>
-                  <td>{{post.user_type}}</td>
-                  <td>{{post.name}}</td>
-                  <td>{{post.customer_number}}</td>
-                  <td>{{post.company}}</td>
-                  <td>{{post.email}}</td>
-                  <td>{{post.phone}}</td>
-                  <td>{{post.address}}</td>
-                  <td>{{post.last_login_ip}}</td>
-                  <td>{{post.is_active}}</td>
-                  <td>
-                    <a [routerLink]="['/admin/user', post.id]"class="btn btn-info">Detail</a>
-                  </td>
-                  </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      
-      
+<div class="row mt-20 ml-5">
+  <div class="col-12">
+    <div class="bg-white">
+
+        <h5 class="pb-3"><b>User Details</b></h5>
+        <div> <a [routerLink]="['/admin/user-register']" class="btn btn-info">Create a new user</a></div>
+
+        <table class="table mb-0 table-striped table-responsive ">
+          <thead class="sticky-header" >
+            <tr>
+              <th  scope="col">Id</th>
+              <th scope="col">User Type</th>
+              <th scope="col"> Name</th>
+              <th scope="col">Company</th>
+              <th scope="col">Email</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Address</th>
+              <th scope="col">Last login ip</th>
+              <th scope="col">Is Active</th>
+              <th scope="col">Action</th>
+              <th scope="col">Update</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let post of user['items']">
+              <td>{{post.id}}</td>
+              <td>{{post.user_type}}</td>
+              <td>{{post.name}}</td>
+              <td>{{post.company}}</td>
+              <td>{{post.email}}</td>
+              <td>{{post.phone}}</td>
+              <td>{{post.address}}</td>
+              <td>{{post.last_login_ip}}</td>
+              <td>{{post.is_active}}</td>
+              <td>
+                <a [routerLink]="['/admin/user', post.id]" class="btn btn-info">Detail</a>
+              </td>
+              <td>
+                <a [routerLink]="['/admin/user/',post.id, 'update']" class="btn btn-info">Update</a>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
       </div>
+    </div>
+  </div>
+
+

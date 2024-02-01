@@ -1,0 +1,19 @@
+<div class="col-4 m-20">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title"><b> Invoice Details</b></h5>
+
+
+            <p>Id:{{invoice.id}}</p>
+            <p>Url:{{invoice.url}}</p>
+            <p> Number:{{invoice.number}}</p>
+            <p> Comments:{{invoice.comments}}</p>
+            <p> Subscription id:{{invoice.subscription_id}}</p>
+            <p>status description:{{invoice.status_description}}</p>
+            <p> Invoice date:{{invoice.invoice_date}}</p>
+            <p>Invoice Due date:{{invoice.invoice_due_date}}</p>
+
+        </div>
+    </div>
+    <a routerLink="/admin/invoice" class="btn btn-info">Back</a>
+</div>

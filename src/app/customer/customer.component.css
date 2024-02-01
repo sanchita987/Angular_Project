@@ -1,0 +1,13 @@
+.sticky-header {
+    position: sticky;
+    top: 50px;
+    background-color: #ffffff;
+    z-index: 500; 
+    margin-top: 30;
+  }
+  .sticky-nav {
+    position: sticky;
+    bottom: 0;
+    padding: 0px;
+
+  }

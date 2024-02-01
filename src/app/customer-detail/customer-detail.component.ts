@@ -21,7 +21,7 @@ export class CustomerDetailComponent {
 
   ngOnInit() {
     this.route.params.subscribe(data => {
-      this.data.getcustomer(data['id']).subscribe((response: any) => {
+      this.data.getCustomer(data['id']).subscribe((response: any) => {
         console.log(response, "response")
         this.customer = response['data'];
       })

@@ -1,36 +1,39 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule, Router } from '@angular/router';
-import { Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { CustomerService } from '../customer.service';
-import { FormGroup } from '@angular/forms';
+import { ActivatedRoute, Route, Router, RouterModule } from '@angular/router';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { SharedModuleModule } from '../shared-module/shared-module.module';
+import { routes } from '../app.routes';
 
 @Component({
-  selector: 'app-customer-register',
+  selector: 'app-customer-update',
   standalone: true,
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
-  templateUrl: './customer-register.component.html',
-  styleUrls: ['./customer-register.component.css'],
+  templateUrl: './customer-update.component.html',
+  styleUrl: './customer-update.component.css'
 })
-export class CustomerRegisterComponent {
+export class CustomerUpdateComponent {
+  customer: any = {
+    data: []
+  };
   selectedFile: File | null = null;
   customer_registerForm: FormGroup;
   customer_registerResponse: any = null;
   errorResponse: any = '';
+  customer_id: any;
+  
 
-  constructor(
+
+  constructor(private data: CustomerService, private route: ActivatedRoute,
     private customerservice: CustomerService,
-    private route: Router,
-    private fb: FormBuilder
-  ) {
+    private router: Router,
+    private fb: FormBuilder) {
     this.customer_registerForm = this.fb.group({
-      customer_type: [null, [Validators.required]],
-      id: [''],
+      customer_type: [null, [Validators.required, Validators.min(0), Validators.max(1), Validators.pattern(/^\d+$/)]],
       email: ['', [Validators.required, Validators.email]],
-      first_name: ['', [Validators.required]],
-      last_name: ['', ],
+      first_name: ['', [Validators.required, Validators.minLength(4)]],
+      last_name: ['', [Validators.required, Validators.minLength(4)]],
       mailing_address: [''],
       deposit: [''],
       zipcode: [''],
@@ -63,59 +66,43 @@ export class CustomerRegisterComponent {
     });
   }
 
-  onregister(): void {
+   ngOnInit() {
+    this.route.params.subscribe(data => {
+      this.customer_id = data['id']
+      this.data.getCustomer(data['id']).subscribe((response: any) => {
+        console.log(response, "response");
+        
+        this.customer_registerForm.patchValue(response['data']);
+        this.customer = response['data'];
+      });
+    });
+  }
+  id: number =  0;
+
+  onupdate(): void {
     console.log(this.customer_registerForm.value);
     if (!this.customer_registerForm.valid) {
       return;
     }
 
-    // If a file is selected, append it to the form data
-    if (this.selectedFile) {
-      const formData = new FormData();
-      formData.append('residence_card_front', this.selectedFile);
+    const customerId = this.id;
+    // this.updateCustomer(customerId, this.customer_registerForm.value);
+  }
 
-      // Set the form control value
-      this.customer_registerForm.patchValue({
-        residence_card_front: formData,
-      });
-    }
-
-    this.customerservice.register(this.customer_registerForm.value).subscribe(
+  updateCustomer(): void {
+    this.customerservice.updateCustomer(this.customer_id, this.customer_registerForm.value).subscribe(
       (response) => {
+        console.log('Customer updated successfully', response);
         this.customer_registerResponse = response;
-        console.log('Customer Register successful:', response);
-        this.route.navigate(['admin/customer']);
+        this.router.navigate(['admin/customer']);
       },
       (error) => {
+        console.error('Error updating customer', error);
         this.errorResponse = 'Error';
       }
     );
   }
-
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
-
-    if (file) {
-      // Store the selected file
-      this.selectedFile = file;
-
-      // Display image preview
-      this.showPreview(file);
-    }
-  }
-
-  showPreview(file: File) {
-    const reader = new FileReader();
-
-    reader.onload = (e: any) => {
-      this.selectedFile = e.target.result;
-    };
-
-    reader.readAsDataURL(file);
-  }
-  get id() {
-    return this.customer_registerForm.get('id');
-  }
+  
 
   get email() {
     return this.customer_registerForm.get('email');
@@ -210,8 +197,4 @@ export class CustomerRegisterComponent {
   get period_of_stay() {
     return this.customer_registerForm.get('period_of_stay');
   }
- 
 }
-
-
-

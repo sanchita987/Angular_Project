@@ -1,12 +1,11 @@
 
 
-<div class="row">
-<div class="col-12">
-    <div class="table-responsive bg-white">
-  
-        <table class="table mb-0">
-          <thead>
-            <h5><b>Customer Details</b></h5><div> <a [routerLink]="['/admin/customer-register']" class="btn btn-info">Create a new customer</a></div>
+<div class="row mt-20 ml-5">
+  <div class="col-12">
+    <h5 class=" pb-3"><b>Customer Details</b></h5><div> <a [routerLink]="['/admin/customer-register']" class="btn btn-info">Create a new customer</a></div>
+
+        <table class="table  table-striped table-responsive">
+          <thead class="sticky-header">
             <tr>
               <th scope="col">Id</th>
               <th scope="col">Email</th>
@@ -18,11 +17,13 @@
               <th scope="col">Total due amount</th>
               <th scope="col">Excess Credit</th>
               <th scope="col">Is Active</th>
-              <th>Action</th>
+              <th scope="col">Action </th>
+              <th scope="col">Edit</th>
+
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let post of customers['items']">
+            <tr *ngFor="let post of customers.items">
               <td>{{post.id}}</td>
               <td>{{post.email}}</td>
               <td>{{post.customer_number}}</td>
@@ -36,11 +37,31 @@
               <td>
                 <a [routerLink]="['/admin/customer', post.id]" class="btn btn-info">Detail</a>
               </td>
+              <td>
+                <a [routerLink]="['/admin/customer/',post.id, 'update']" class="btn btn-info">Update</a>
+              </td>
               </tr>
           </tbody>
         </table>
-      </div>
-    </div>-
-  
-  
+    </div>
   </div>
+  <nav aria-label="Page navigation example" class="sticky-nav">
+    <ul class="pagination text-right">
+      <li class="page-item ">
+        <a class="page-link " (click)="loadPreviousPage()">Previous</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" (click)="loadNextPage()">Next</a>
+      </li>
+    </ul>
+  </nav>
+
+
+  
+<!-- Pagination and bootstrap -->
+
+
+
+
+
+  
