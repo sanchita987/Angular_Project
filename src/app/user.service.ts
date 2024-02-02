@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AccessTokenInterface, HttpHeadersInterface } from './http-interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -10,19 +11,23 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class UserService {
 
   constructor(private http: HttpClient) { }
+  private getHeaders(): HttpHeadersInterface {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+    });
+
+    return headers;
+  }
   getuser() {
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', 'bearer ' + localStorage.getItem('access_token'));
+    
     return this.http.get<any[]>('https://nitvcrmapi.truestreamz.com/api/v1/user', {
       params: { page: 1 },
-      headers
+      headers : this.getHeaders() 
     });
   }
   getusers(id: number) {
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', 'bearer ' + localStorage.getItem('access_token'));
-    return this.http.get<any>('https://nitvcrmapi.truestreamz.com/api/v1/user/' + id + '/detail', {
-      headers
+   return this.http.get<any>('https://nitvcrmapi.truestreamz.com/api/v1/user/' + id + '/detail', {
+    headers : this.getHeaders() 
     });
   }
 
@@ -33,21 +38,13 @@ export class UserService {
     return this.http.post(this.registerUrl, data);
   }
   updateUser(id: number, updatedData: any): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + localStorage.getItem('access_token')
-    });
-
-    const url = `https://nitvcrmapi.truestreamz.com/api/v1/user/${id}`;
-    return this.http.put<any>(url, updatedData, { headers });
+   const url = `https://nitvcrmapi.truestreamz.com/api/v1/user/${id}`;
+    return this.http.put<any>(url, updatedData, {headers : this.getHeaders()  });
   }
 
   
   registerUser(userData: any) {
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + localStorage.getItem('access_token')
-    });
-
-    return this.http.post('https://nitvcrmapi.truestreamz.com/api/v1/user', userData,{headers});
+    return this.http.post('https://nitvcrmapi.truestreamz.com/api/v1/user', userData,{headers : this.getHeaders() });
   }
 }
 

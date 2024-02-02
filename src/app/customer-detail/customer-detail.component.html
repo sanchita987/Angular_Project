@@ -28,6 +28,7 @@
         <th scope="col">Last Name</th>
         <th scope="col">Mobile</th>
         <th scope="col">Action</th>
+        <th scope="col">Remove</th>
 
 
       </tr>
@@ -39,7 +40,10 @@
         <td>{{contact.last_name}}</td>
         <td>{{contact.mobile}}</td>
         <td>
-   <!--     <a [routerLink]="['/admin/customer/',post.id, 'update']" class="btn btn-info">Edit</a>--->  
+          <button type="button" class="btn btn-info" (click)="update(contact)">Edit</button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-danger" (click)="delete(contact)">Delete</button>
         </td>
     </tr>
     </table>
@@ -144,7 +148,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let post of invoices.items">
+        <tr *ngFor="let post of invoices?.items">
           <td>{{post.url}}</td>
           <td>{{post.number}}</td>
           <td>{{post.comments}}</td>
@@ -153,9 +157,6 @@
           <td>{{post.status_description}}</td>
           <td>{{post.invoice_date}}</td>
           <td>{{post.invoice_due_date}}</td>
-          <td>
-            <a [routerLink]="['/admin/invoice', post.id]" class="btn btn-info">Detail</a>
-          </td>
         </tr>
       </tbody>
     </table>
