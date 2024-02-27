@@ -1,0 +1,143 @@
+
+<div class="row">
+    <div class="table-responsive">
+        <div class="col-12 overflow-y">
+            <div class="bg-white">
+
+                <h5 class="pb-3"><b>Products</b></h5>
+                <!-- Button trigger modal -->
+                <div class="container">
+                    <div class="row align-items-center justify-content-end">
+                      <div class="col-auto">
+                        <div class="form-group mr-0">
+                          <label for="search">Search</label>
+                          <input id="search" (keyup)="searchData($event)" class="form-control" type="text" name="search">
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <div class="form-group">
+                          <label for="selectElement">Select an option:</label>
+                          <select (change)="filterData($event)" name="selectElement" id="selectElement" class="form-control">
+                            <option value="all">All</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="active">Active</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <button type="button" class="btn btn-info" (click)="openModal({})">
+                            <i class="fa-solid fa-plus mr-1"></i>Add new
+                        </button>
+                      </div>
+                    </div>
+                </div>
+            <!-- Modal -->
+                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Add Product</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form [formGroup]="productForm">
+                                    <div class="form-outline mb-4 col">
+                                        <label class="form-label" for="code" name="code" class="required">Product
+                                            Code</label>
+                                        <input type="text" id="code" class="form-control form-control-lg"
+                                            formControlName="code" />
+                                        <div *ngIf="productForm.controls['code'].invalid && (productForm.controls['code'].dirty || productForm.controls['code'].touched)"
+                                            class="alert alert-danger">
+                                            <div *ngIf="productForm.controls['code'].errors?.['required']">
+                                                Product code is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-outline mb-4 col">
+                                        <label class="form-label" for="name" name="name" class="required">Product
+                                            Name</label>
+                                        <input type="text" id="product_name" class="form-control form-control-lg"
+                                            formControlName="name" />
+                                        <div *ngIf="productForm.controls['name'].invalid && (productForm.controls['name'].dirty || productForm.controls['name'].touched)"
+                                            class="alert alert-danger">
+                                            <div *ngIf="productForm.controls['name'].errors?.['required']">
+                                                Product name is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-outline mb-4 col">
+                                        <label class="form-label" for="status" name="status"
+                                            class="required">Status</label>
+                                        <select class="form-select" aria-label="Default select example"
+                                            formControlName="status">
+                                            <option selected>Select the status</option>
+                                            <option value="true">Active</option>
+                                            <option value="false">Inactive</option>
+                                        </select>
+                                        <div *ngIf="productForm.controls['status'].invalid && (productForm.controls['status'].dirty || productForm.controls['status'].touched)"
+                                            class="alert alert-danger">
+                                            <div *ngIf="productForm.controls['status'].errors?.['required']">
+                                                Status is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-outline mb-4 col">
+                                        <label class="form-label">Description</label>
+                                        <textarea id="description" name="description" rows="4"
+                                            class="form-control form-control-lg" placeholder="Description"
+                                            formControlName="description"></textarea>
+                                        <div *ngIf="productForm.controls['description'].invalid && (productForm.controls['description'].dirty || productForm.controls['description'].touched)"
+                                            class="alert alert-danger">
+                                            <div *ngIf="productForm.controls['description'].errors?.['required']">
+                                                Description is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+                                <button type="button" class="btn btn-info" (click)="updateProduct()">Save
+                                    changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table mb-0">
+                    <thead class="sticky-header">
+                        <tr>
+                            <th scope="col" mat-Sort-header>Code</th>
+                            <th scope="col">Name</th>
+                            <th scope="col"> Plans</th>
+                            <th scope="col">Addons</th>
+                            <th scope="col">Coupons</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of product.data.items">
+                            <td>{{item.name}}</td>
+                            <td>{{item.code}}</td>
+                            <td>{{item.active_plan_count}}</td>
+                            <td>{{item.active_addon_count}}</td>
+                            <td>{{item.active_coupon_count}}</td>
+                                <td><span [ngClass]="{'text-success': item.status, 'text-danger': !item.status}" class="badge bg-light fw-bold">{{item.text}}
+                                </span></td>
+                            <td>
+                                <button type="button" class="btn btn-info" (click)="showModal(item)">Edit</button>
+                            </td>
+                            <td>
+                                <!----   <button type="button" class="btn btn-info" (click)="update(product)">Edit</button>-->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--[routerLink]="['/admin/customer-register']"-->

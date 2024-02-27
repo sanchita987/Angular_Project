@@ -1,22 +1,25 @@
-<div class="row mt-20 ml-5">
-  <div class="col-12">
-    <div class="bg-white">
+<div class="row ml-5">
+  <div class="table-responsive">
+    <div class="col-12 overflow-y">
+      <div class="bg-white">
 
         <h5 class="pb-3"><b>User Details</b></h5>
-        <div> <a [routerLink]="['/admin/user-register']" class="btn btn-info">Create a new user</a></div>
-
-        <table class="table mb-0 table-striped table-responsive ">
-          <thead class="sticky-header" >
+        <div class="row justify-content-end">
+          <div class="col-auto">
+            <a [routerLink]="['/admin/user-register']" class="btn btn-info"><i class="fa-solid fa-plus mr-1"></i>Add new</a>
+          </div>
+          </div>
+        <table class="table mb-0 ">
+          <thead class="sticky-header">
             <tr>
-              <th  scope="col">Id</th>
+              <th scope="col">Id</th>
               <th scope="col">User Type</th>
               <th scope="col"> Name</th>
               <th scope="col">Company</th>
               <th scope="col">Email</th>
               <th scope="col">Phone</th>
               <th scope="col">Address</th>
-              <th scope="col">Last login ip</th>
-              <th scope="col">Is Active</th>
+              <th scope="col">Status</th>
               <th scope="col">Action</th>
               <th scope="col">Update</th>
             </tr>
@@ -30,7 +33,6 @@
               <td>{{post.email}}</td>
               <td>{{post.phone}}</td>
               <td>{{post.address}}</td>
-              <td>{{post.last_login_ip}}</td>
               <td>{{post.is_active}}</td>
               <td>
                 <a [routerLink]="['/admin/user', post.id]" class="btn btn-info">Detail</a>
@@ -45,5 +47,4 @@
       </div>
     </div>
   </div>
-
-
+</div>

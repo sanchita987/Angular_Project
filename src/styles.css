@@ -1,2 +1,18 @@
 
+
+body {
+    font-size: 12px; 
+    font-family: 'Arial', sans-serif; 
+  }
+  label {
+    font-size: 12x; 
+    font-family: 'Arial', sans-serif; 
+  }
+  input::placeholder {
+    font-size: 12px;
+    font-family: 'Arial', sans-serif;
+  }
   
+  
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

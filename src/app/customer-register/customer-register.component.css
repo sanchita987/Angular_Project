@@ -1,0 +1,36 @@
+.required:after {
+    content: " *";
+    color:red;
+}
+input {
+    font-size: 16px; padding: 5px;
+}
+.light-line {
+    border-top: 1px solid #ccc; 
+}
+.nav-item {
+cursor: pointer;
+  }
+  
+  .home :hover {
+    color: rgb(35, 137, 255);
+}
+
+
+.active {
+    border-bottom: 2px solid rgb(35, 137, 255);
+}
+table th, table td {
+    padding-top: 10px; 
+    padding-bottom: 10px; 
+  }
+  input:focus {
+    outline: none;
+    border: none;
+}
+.btn-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1; 
+}

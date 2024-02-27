@@ -7,6 +7,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 
+type Customer = {
+  [key: string]: any;
+  created_at: string;
+};
 
 @Component({
   selector: 'app-customer',
@@ -19,6 +23,8 @@ export class CustomerComponent implements OnInit {
   customers: any = {
     items: []
   };
+  sortColumn = 'created_at';
+  reverseSort = false;
   currentPage: number = 1;
   totalPages: number = 50;
   updatedData: any;
@@ -29,32 +35,73 @@ export class CustomerComponent implements OnInit {
   ngOnInit() {
     this.loadCustomers();
   }
-
+  search = ''
+  searchData(e: any) {
+    console.log(e.target.value)
+    this.search = e.target.value;
+    this.loadCustomers()
+  }
+  filter = 'all'
+  filterData(e: any) {
+    console.log(e.target.value)
+    this.filter = e.target.value;
+    this.loadCustomers()
+  }
   loadCustomers() {
-    this.data.getCustomers(this.currentPage).subscribe((response: any) => {
-      console.log(response, 'response');
-      this.customers = response.data;
-      this.totalPages = response.total_pages;
-      this.totalPages = Math.min(response.total_pages, 10);
+    this.data.getCustomers(this.currentPage, this.sortColumn, this.reverseSort ? 'desc' : 'asc', this.search, this.filter)
+      .subscribe((response: any) => {
+        console.log(response, 'response');
+        this.customers = response.data;
+        this.totalPages = response.total_pages;
+        this.totalPages = Math.min(response.total_pages, 10);
+      });
+  }
+
+  toggleSortOrder(column: string): void {
+    if (this.sortColumn === column) {
+      this.reverseSort = !this.reverseSort;
+    } else {
+      this.sortColumn = column;
+      this.reverseSort = false;
+    }
+    this.customers.items.sort((a: any, b: any) => {
+      const valueA = a[this.sortColumn];
+      const valueB = b[this.sortColumn];
+
+      if (typeof valueA === 'string' && typeof valueB === 'string') {
+        return this.reverseSort ? valueB.localeCompare(valueA) : valueA.localeCompare(valueB);
+      } else {
+        return this.reverseSort ? valueB - valueA : valueA - valueB;
+      }
     });
   }
+
+
 
   loadNextPage() {
     this.currentPage++;
     this.loadCustomers();
-    // }
   }
 
   loadPreviousPage() {
-    if (this.currentPage == 1) {
-      alert("No prevoius page found");
+    if (this.currentPage === 1) {
+      alert("No previous page found");
       return;
     }
     this.currentPage--;
     this.loadCustomers();
-    // }
   }
 
-    
-    
+  getPageNumbers(): number[] {
+    const totalPagesArray = [];
+    for (let i = 1; i <= 5; i++) {
+      totalPagesArray.push(i);
+    }
+    return totalPagesArray;
   }
+
+  loadPage(page: number) {
+    this.currentPage = page;
+    this.loadCustomers();
+  }
+}

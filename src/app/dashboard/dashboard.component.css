@@ -1,0 +1,12 @@
+.box {
+    border: 5px solid #000000; /* Border color */
+    border-radius: 5px; /* Border radius for rounded corners */
+    width: 100%; /* You can adjust the width as needed */
+    height: 100%; /* You can adjust the height as needed */
+    padding: 50px;
+  }
+  thead th {
+    position: sticky;
+    top: 0;
+    background-color: white;
+  }

@@ -18,6 +18,7 @@ import { NgForm } from '@angular/forms';
   styleUrl: './user-register.component.css'
 })
 export class UserRegisterComponent {
+  
   registerForm: any
   registerResponse: any = null;
   errorResponse: any = ''
@@ -25,9 +26,9 @@ export class UserRegisterComponent {
     // private route: Router,
     private fb: FormBuilder) {
     this.registerForm = this.fb.group({
-      email: ['', [, Validators.email]],
-      password: ['', [, Validators.minLength(8)]],
-      name: ['', [, Validators.minLength(4)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['',[Validators.required, ]],
+      name: ['', [Validators.required,]],
       company: ['', []],
       address: ['', []],
       user_type: ['', []],
@@ -35,6 +36,7 @@ export class UserRegisterComponent {
       phone: ['', [, Validators.minLength(10)]],
     });
   }
+  
 
   onregister(): void {
     console.log(this.registerForm.value)

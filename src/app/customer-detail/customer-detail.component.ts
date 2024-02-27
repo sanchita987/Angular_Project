@@ -55,7 +55,9 @@ export class CustomerDetailComponent {
           console.log('Contact saved:', response);
           this.customerService.getCustomer(this.cid).subscribe((response: any) => {
             this.customer = response['data'];
-          })
+          });
+          this.contactResponse = null; 
+          this.errorResponse = null;
           $('#exampleModalLong').modal('hide');
         },
         error => {
@@ -74,18 +76,23 @@ export class CustomerDetailComponent {
 
   updateContact(): void {
 
-    this.customerService.updateContact(this.cid, this.contact_id, this.contactForm.value).subscribe(
-      (response) => {
-        console.log('Contact updated successfully', response);
-        this.contactResponse = response;
-        this.contact_id = null;
-        $('#exampleModalLong').modal('hide');
-      },
-      (error) => {
-        console.error('Error updating contact', error);
-        this.errorResponse = 'Error';
-      }
-    );
+    // this.customerService.updateContact(this.cid, this.contact_id, this.contactForm.value).subscribe(
+    //   (response) => {
+    //     console.log('Contact updated successfully', response);
+    //     this.contactResponse = response;
+    //     this.contact_id = null;
+    //   // Fetching the updated customer data toreceive the latest data
+    //     this.customerService.getCustomer(this.cid).subscribe((customerResponse: any) => {
+    //     this.customer = customerResponse['data'];
+    //   });
+
+    //     $('#exampleModalLong').modal('hide');
+    //   },
+    //   (error) => {
+    //     console.error('Error updating contact', error);
+    //     this.errorResponse = 'Error';
+    //   }
+    // );
   }
 
   delete(contact: any) {

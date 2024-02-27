@@ -1,3 +1,16 @@
 .custom-heading {
     font-size: 2rem; 
 }  
+.password-input-container {
+    position: relative;
+  }
+  
+  /* Position the eye icon inside the input */
+  .password-input-container i.fa-eye {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #605a5a;
+  }

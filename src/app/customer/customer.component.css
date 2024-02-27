@@ -1,13 +1,38 @@
-.sticky-header {
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .pagination button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+  }
+  
+  .pagination button.active {
+    background-color: #007bff;
+    color: #fff;
+  }
+  .sticky-header {
     position: sticky;
     top: 50px;
     background-color: #ffffff;
     z-index: 500; 
     margin-top: 30;
   }
-  .sticky-nav {
-    position: sticky;
-    bottom: 0;
-    padding: 0px;
-
+  .sortable-header {
+    cursor: pointer; 
   }
+  
+  .sortable-header:hover {
+    text-decoration: underline; 
+
+  } 
+  .btn
+  {
+    z-index: 500;
+  } 
+
+  

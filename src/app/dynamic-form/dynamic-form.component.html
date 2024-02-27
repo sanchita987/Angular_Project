@@ -1,0 +1,21 @@
+<!----<div class = "mt-20">
+    <form [formGroup] ="dynamicForm">
+      <label for="username">Enter your name:</label>
+      <input type="text" id="username" name="username" formControlName="username" /><br>
+      <label for="password">Enter your password:</label>
+      <input type="password" id="password" name="password" formControlName="password"/>
+      additional field
+      <div formArrayName="additionalFields">
+        <div *ngFor="let field of additionalFields.controls; let i = index">
+          <label for="additionalField{{ i }}">Additional Field {{ i + 1 }}:</label>
+          <input type="text" [id]="'additionalField' + i" formControlName="field">
+          <button type="button" (click)="removeTextField(i)">Remove</button>
+        </div>
+      </div>
+  
+      <button type="button" (click)="addTextField()">Add Text Field</button><br>
+      <button type="submit">Submit</button>
+
+    </form>
+  </div>---->
+  

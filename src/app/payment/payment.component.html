@@ -1,0 +1,49 @@
+<div class="row ml-5">
+    <div class="table-responsive">
+      <div class="col-12 overflow-y">
+        <div class="bg-white">
+  
+          <h5 class="pb-3"><b>Payments</b></h5>
+          <div class="row justify-content-end">
+            <div class="col-auto">
+              <a [routerLink]="['/admin/create-payment']" class="btn btn-info"><i class="fa-solid fa-plus mr-1"></i>Add new</a>
+            </div>
+            </div>
+          <table class="table mb-0">
+            <thead class="sticky-header">
+              <tr>
+                <th scope="col">Payment Date</th>
+                <th scope="col">Payment No.</th>
+                <th scope="col"> Invoice Number</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Mode</th>
+                <th scope="col">Total Amount</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of payment.data.items">
+                <td>{{item.paid_at}}</td>
+                <td>{{item.payment_number}}</td>
+                <td>
+                    <ng-container *ngFor="let invoice of item.invoices">
+                        {{ invoice.number }}
+                      </ng-container>
+                </td>
+                <td>{{item.customer.first_name}}</td>
+                <td>{{item.mode}}</td>
+                <td>{{item.amount}}</td>
+                <td>
+                  <span [ngClass]="{'text-success': item.status, 'text-danger': !item.status}" class="badge bg-light fw-bold">
+                    {{item.text}}
+                  </span>
+                </td>
+                
+                
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>

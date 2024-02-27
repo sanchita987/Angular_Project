@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable,map } from 'rxjs';
 import { AccessTokenInterface, HttpHeadersInterface } from './http-interfaces';
+
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +25,16 @@ export class InvoiceServiceService {
     }
     return this.http.get<any[]>('https://nitvcrmapi.truestreamz.com/api/v1/invoice?customer_id=' + customer_id, {
       headers: this.getHeaders()
-    });
+    })
+    .pipe(
+      map((data: any) => {
+        data['data']['items'].forEach((element: any) => {
+          element.text = element.status ? 'Paid' : 'overdue';
+        });
+        return data;
+      })
+    );
   }
-
   getInvoices(id: number) {
     return this.http.get<any>('https://nitvcrmapi.truestreamz.com/api/v1/invoice/' + id, {
       headers: this.getHeaders()

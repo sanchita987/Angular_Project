@@ -1,0 +1,98 @@
+
+<div class="mt-15  ml-auto mr-auto">
+    <div class="row ">
+    <h2 class="text-uppercase text-center mb-5 "><b>Create Subscription</b></h2>
+    <form>
+        <div class="form-group">
+          <label for="selectCustomer">Select Customer *</label>
+          <select id="selectCustomer" class="form-control" formControlName="customer_name" (change)="updateSubscriberName($event)">
+
+            <option>Select Customer</option>
+            <option *ngFor="let customer of customers" [value]="customer.first_name">{{ customer.first_name }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="subscriberName">Subscriber Name *</label>
+          <input type="text" id="subscriberName" class="form-control" placeholder="Enter subscriber name" formControlName="subscriber_name">
+        </div>
+      
+        <div class="form-group">
+          <label for="subscriberRelation">Subscriber Relation *</label>
+          <select id="selectCustomer" class="form-control" formControlName="subscriber_relation">
+            <option value="self">Self</option>
+            <option value="employee">Employee</option>
+            <option value="spouse">Spouse</option>
+            <option value="child">Child</option>
+            <option value="parent">Parent</option>
+            <option value="relative">Relative</option>
+            <option value="friend">Friend</option>
+          </select>
+        </div>
+      
+        <div class="form-group">
+          <label for="selectProduct">Select Product *</label>
+          <select id="selectProduct" class="form-control" formControlName="product_id">
+          </select>
+        </div>
+      
+        <div class="form-group">
+          <label for="planNumber">Plan Number *</label>
+          <input type="text" id="planNumber" class="form-control" placeholder="Enter plan number"formControlName="plan_number">
+        </div>
+      
+        <div class="form-group">
+          <label for="startDate">Start Date *</label>
+          <input type="date" id="startDate" class="form-control"formControlName="invoice_creation_day">
+        </div>
+      
+        <div class="form-group">
+          <label for="billingCycle">Billing Cycle *</label>
+          <select id="billingCycle" class="form-control"formControlName="billing_cycle">
+          </select>
+        </div>
+        <input type="checkbox" id="never_expire_checkbox" name="never_expire">
+        <label for="never_expire_checkbox">Never Expire</label>
+     
+      
+        <div class="form-group">
+          <label for="invoiceBillingDay">Invoice Billing Day *</label>
+          <select id="selectCustomer" class="form-control"  aria-label=".form-select-lg example" formControlName="start_date">
+            <option *ngFor="let number of numbersArray" [value]="number">{{ number }}</option>
+          </select>
+        </div>
+      
+        <div class="form-group">
+          <label for="selectCoupons">Select Coupons</label>
+          <select id="selectCoupons" class="form-control" placeholder="select coupon/s" formControlName="coupons">
+          </select>
+        </div>
+      
+        <div class="form-group">
+          <h3 class="mb-2">When do you want the coupon to be applied?</h3>
+          <input type="radio" id="startingDate" name="applyCoupon" value="startingDate">
+          <label for="startingDate">Starting date</label>
+          <input type="radio" id="nextBillingDate" name="applyCoupon" value="nextBillingDate" class="ml-3 mr-1">
+          <label for="nextBillingDate">Next billing date</label>
+        </div>
+        
+        <div class="form-group">
+          <h3 class="mb-2">Invoicing Details</h3>
+          <p class="mb-2">Do you want to skip invoice until incoming billing date?</p>
+          <input type="radio" id="skipInvoiceYes" name="skipInvoice" value="yes">
+          <label for="skipInvoiceYes">Yes</label>
+          <input type="radio" id="skipInvoiceNo" name="skipInvoice" value="no" class="ml-3 mr-1">
+          <label for="skipInvoiceNo">No</label><br><br>
+        </div>
+          <div class="form-group">
+            <h3 class="mb-2">When do you want to raise the invoice?</h3>
+          <input type="radio" id="raiseInvoiceNow" name="raiseInvoice" value="now" formControlName="invoice_now">
+          <label for="raiseInvoiceNow">Invoice Now</label>
+          <input type="radio" id="raiseInvoiceLater" name="raiseInvoice" value="later" class="ml-3 mr-1"formControlName="has_setup_fee">
+          <label for="raiseInvoiceLater">Add to unbilled charges and invoice later</label>
+        </div>
+        <button type="button" class="btn btn-info" (click)="onSubscriptionRegister()">Submit </button>
+      </form>
+      </div>
+      </div>
+      
+    

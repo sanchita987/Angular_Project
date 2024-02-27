@@ -1,0 +1,65 @@
+<form>
+    <div class="form-group">
+        <h5 class=" pb-3"><b>Add Payment</b></h5>
+      <label for="customerName">Customer Name *</label>
+      <input type="text" id="customerName" name="customerName" class="form-control" required>
+    </div>
+  
+    <div class="form-group">
+      <label for="selectCustomer">Select Customer</label>
+      <select id="selectCustomer" name="selectCustomer" class="form-control">
+        <option value="customer1">Customer 1</option>
+        <option value="customer2">Customer 2</option>
+      </select>
+    </div>
+  
+    <div class="form-group">
+      <label for="amountReceived">Amount Received *</label>
+      <input type="number" id="amountReceived" name="amountReceived" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <input type="checkbox" id="fullAmountReceivedCheckbox" name="fullAmountReceived">
+        <label for="fullAmountReceivedCheckbox" class="ml-1">Received full amount (¥ 0)</label>
+      </div>
+  
+    <div class="form-group">
+      <label for="paymentDate">Payment Date *</label>
+      <input type="date" id="paymentDate" name="paymentDate" class="form-control" required>
+    </div>
+  
+    <div class="form-group">
+      <label for="modeOfPayment">Mode of Payment *</label>
+      <input type="text" id="modeOfPayment" name="modeOfPayment" class="form-control" required>
+    </div>
+  
+    <div class="form-group">
+      <label for="reference">Reference</label>
+      <input type="text" id="reference" name="reference" class="form-control">
+    </div>
+  
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" name="description" class="form-control"></textarea>
+    </div>
+  
+    <div class="form-group">
+      <label>Apply to invoices immediately ?</label>
+      <div>
+        <input type="radio" id="applyImmediatelyYes" name="applyImmediately" value="Yes"class="ml-1">
+        <label for="applyImmediatelyYes" class="ml-1">Yes</label>
+        <input type="radio" id="applyImmediatelyNo" name="applyImmediately" value="No" class="ml-1">
+        <label for="applyImmediatelyNo" class="ml-1">No</label>
+      </div>
+    </div>
+  
+    <div class="form-group">
+        <input type="checkbox" id="payment" name="paymment">
+      <label for="payment" class="ml-1">Email a “thank you” note for this payment</label>
+    </div>
+  
+    <div class="form-group">
+      <button type="button" class="btn btn-light ml-2">Cancel</button>
+      <button type="submit" class="btn btn-info">Save</button>
+    </div>
+  </form>
+  

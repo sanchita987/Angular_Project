@@ -19,6 +19,7 @@ export class LoginComponent {
   loginResponse: any = null;
   errorResponse: any = ''
   loginForm:any;
+  hidePassword: boolean = true; // Initial state: password is hidden
   constructor(private loginService: LoginService, 
     private route: Router,
     private fb: FormBuilder) {
@@ -54,8 +55,10 @@ export class LoginComponent {
         }
       );
   }
-  
+  togglePasswordVisibility() {
+    this.hidePassword = !this.hidePassword;
 
+}
 }
 
         

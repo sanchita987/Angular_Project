@@ -1,33 +1,86 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-2">
+      <nav class="navbar navbar-expand-lg navbar-light bs-side-navbar" style="position: fixed;" [ngClass]="{'shrink': isNavbarShrunk}">
+        <div class="flex justify-center items-center mb-3 ml-3">
+          <img src="assets/images/companylogo.webp" routerLink="dashboard" alt="Customer Image" class="h-10 w-200" style="color: transparent;">
+        </div>
+        <!--- <a class="navbar-brand mb-3"  routerLink="dashboard" routerLinkActive="active">NITV CRM</a>-->
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item mr-3 mb-2">
+              <div class="nav-item mr-3 mb-2 d-flex align-items-center">
+                <img src="assets/images/dashboard.png" alt="Customer Image" style="height: 15px; width: 15px;">
+                <a class="nav-link" routerLink="dashboard" routerLinkActive="active">Dashboard</a>
+              </div>
+            </li>
+            <li class="nav-item mchromer-3 mb-2">
+              <div class="nav-item mr-3 mb-2 d-flex align-items-center">
+                <img src="assets/images/box.png" alt="Customer Image" style="height: 20px; width: 20px;">
+                <a class="nav-link" routerLink="products" routerLinkActive="active">Products</a>
+              </div>
+            </li>
+            <li class="nav-item mr-3 mb-2">
+              <div class="nav-item mr-3 mb-2 d-flex align-items-center">
+                <img src="assets/images/c.png" alt="Customer Image" style="height: 25px; width: 25px;">
+                <a class="nav-link" routerLink="customer" routerLinkActive="active">Customers</a>
+              </div>
+            </li>
+            <li class="nav-item mr-3 mb-2">
+              <div class="nav-item mr-3 mb-3 d-flex align-items-center">
+                <img src="assets/images/subscription.jpg" alt="Customer Image" style="height: 25px; width: 25px;">
+                <a class="nav-link" routerLink="subscriptions" routerLinkActive="active">Subscriptions</a>
+              </div>
+            </li>
+            <li class="nav-item mr-3 mb-2">
+              <div class="nav-item mr-3 mb-3 d-flex align-items-center">
+                <img src="assets/images/payment.png" alt="Customer Image" style="height: 25px; width: 25px;">
+                <a class="nav-link" routerLink="payment" routerLinkActive="active">Payment</a>
+              </div>
+            </li>
+            <li class="nav-item mr-3 mb-2">
+              <div class="nav-item mr-3 mb-3 d-flex align-items-center">
+                <img src="assets/images/user.png" alt="Customer Image" style="height: 25px; width: 25px;">
+                <a class="nav-link" routerLink="user" routerLinkActive="active">User</a>
+              </div>
+            </li>
+            <li class="nav-item mr-3 mb-2">
+              <div class="nav-item mr-3 mb-3 d-flex align-items-center">
+                <img src="assets/images/invoicesLogo.svg" alt="Customer Image" style="height: 25px; width: 25px;">
+                <a class="nav-link" routerLink="invoice" routerLinkActive="active">Invoice</a>
+              </div>
+            </li>
+            <li class="nav-item mr-3 mb-2">
+              <div class="nav-item mr-3 mb-3 d-flex align-items-center">
+                <img src="assets/images/taxes.png" alt="Customer Image" style="height: 25px; width: 25px;">
+                <a class="nav-link" routerLink="tax" routerLinkActive="active">Taxes</a>
+              </div>
+            </li>
+            <li class="nav-item mr-3 mb-2">
+              <div class="nav-item mr-3 mb-3 d-flex align-items-center">
+                <img src="assets/images/logout.png" alt="Customer Image" style="height: 20px; width: 20px;">
+                <a class="nav-link" (click)="logout()">Logout</a>
+              </div>
+            </li>
+          </ul>
+      </nav>
+    </div>
+    <div class="col-lg-10">
+      <div style="display: flex; align-items: center;">
+        <span>
+          <img alt="" width="25" height="25" (click)="toggleNavbar()" src="assets/images/menu.webp" style="color: transparent;">
+        </span>
+        <div style="display: flex; align-items: center; margin-left: auto;">
+          <img src="assets/images/sun.svg" alt="sunlight" style="height: 30px; width: 30px; margin-right: 10px;">
+          <img src="assets/images/notification.svg" alt="Customer Image" style="height: 30px; width: 30px; margin-right: 10px;">
+          <img src="assets/images/profileimage.svg" alt="Customer Image" style="height: 30px; width: 30px; margin-right: 10px;">
+          <img src="assets/images/preference.svg" alt="Customer Image" style="height: 30px; width: 30px; margin-right: 10px;">
+        </div>
+      </div>
+      
+    
+     
+        <router-outlet></router-outlet>
 
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top " style=" z-index: 100;">
-  <a class="navbar-brand" href="#">NITV CRM</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item mr-3">
-            <a class="nav-link" routerLink="customer"  routerLinkActive="active">Customer</a>
-          </li>
-          <li class="nav-item mr-3">
-            <a class="nav-link" routerLink="user"  routerLinkActive="active">User</a>
-          </li>
-          <li class="nav-item mr-3">
-            <a class="nav-link" routerLink="invoice"  routerLinkActive="active"> Invoice</a>
-          </li>
-          <li class="nav-item mr-3">
-            <input type="button" (click)="logout()" class="btn btn-info" value=" logout">
-          </li>
-          
-          
-    </ul>
+    </div>
   </div>
-</nav>
-<div class="container">
-    <router-outlet></router-outlet>
 </div>
-
-
-
-

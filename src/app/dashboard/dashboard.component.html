@@ -1,78 +1,122 @@
-<section class="intro">
-  <div class="gradient-custom-1 h-100 mt-20">
-    <div class="mask d-flex align-items-center h-100">
-      <div class="container">
-        <div class="row">
-          <div class="col-8">
-       <!-----    <div class="table-responsive bg-white">
-              <table class="table mb-0">
-                <thead>
-                  <h5>Plan summary</h5>
-                  <tr>
-                    <th scope="col">Plan name</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Amount</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let post of posts">
-                    <td>{{post.plan_name}}</td>
-                    <td>{{post.quantity}}</td>
-                    <td>{{post.amount}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>-->
 
-            <h5 class="pb-3" ><b>Subscription summary</b></h5>
-            <br>
-            <div class="table-responsive bg-white">
-              <table class="table mb-0 table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">Date</th>
-                    <th scope="col">Signups</th>
-                    <th scope="col">Activation</th>
-                    <th scope="col">cancellations</th>
-                    <th scope="col">Customers</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let post of subs">
-                    <td>{{post.date}}</td>
-                    <td>{{post.signups}}</td>
-                    <td>{{post.activation}}</td>
-                    <td>{{post.cancellations}}</td>
-                    <td>{{post.customers}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="col-4">
-            <div class="card" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title"><b> Statistics</b></h5>
-               <p>total_customers: {{stat.total_customers}}</p>
-                <p>total_Subscriptions: {{stat.total_Subscriptions}}</p>
-                <p>total_products: {{stat.total_products}}</p>
-                <p>total_unpaid_invoices: {{stat.total_unpaid_invoices}}</p>
-              </div>
-            </div>
-            <br>
-              <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                  <h5 class="card-title"><b>Sign ups</b></h5>
-                  <p>Today: {{sign.today}}</p>
-                  <p>yesterday: {{sign.yesterday}}</p>
-                  <p>This month: {{sign.this_month}}</p>
-              </div>
-              </div>
+  <div class="row mt-5">
+    <div class="col-md-7">
+      <div class="table-responsive bg-white">
+        <table class="table mb-0 mb-4">
+          <thead>
+            <h5 class="mb-3"><b>Plan summary</b></h5>
+            <tr>
+              <th scope="col" style="text-transform: uppercase;">Plan name</th>
+              <th scope="col" style="text-transform: uppercase;">Quantity</th>
+              <th scope="col" style="text-transform: uppercase;">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let post of posts">
+              <td>{{post.plan_name}}</td>
+              <td>{{post.quantity}}</td>
+              <td>{{post.amount}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
+      <h5 class="pb-3"><b>Subscription summary</b></h5>
+      <br>
+      <div class="table-responsive bg-white">
+        <table class="table  mb-4">
+          <div class="table-responsive" style="height:400px">
+          <thead>
+            <tr>
+              <th scope="col" style="text-transform: uppercase;">Date</th>
+              <th scope="col" style="text-transform: uppercase;">Signups</th>
+              <th scope="col" style="text-transform: uppercase;">Activation</th>
+              <th scope="col" style="text-transform: uppercase;">cancellations</th>
+              <th scope="col" style="text-transform: uppercase;">Customers</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let post of subs">
+              <td>{{post.date}}</td>
+              <td>{{post.signups}}</td>
+              <td>{{post.activation}}</td>
+              <td>{{post.cancellations}}</td>
+              <td>{{post.customers}}</td>
+            </tr>
+          </tbody>
           </div>
-          
-        </div>
-        </div>
+        </table>
       </div>
     </div>
-</section>
+    <div class="col-md-4">
+      <div class="row mb-3 ">
+        <div class="col-md-6">
+          <div class="box border" style="background-color:#f1f2ff; height:200px; width:200px;">
+            <div style="background-color: #7a70ee; display: inline-block; padding: 5px;">
+            <img src="assets/images/wcustomers.png" alt="Customer Image" style="height: 40px; width: 40px;">
+            </div>
+            <p class="py-0 font-bold text-[13px] text-[#5b5756] dark:text-[#959eb0] mb-10 ">Customers<br>
+              {{stat?.total_customers}}</p>
+              <p class="py-0 font-bold text-[13px] text-[#5b5756] dark:text-[#959eb0]-5" >
+                {{stat?.new_customers}} <span >New</span></p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="box border" style="background-color: #fef4e2; height:200px; width:200px;">
+            <div style="background-color: #ff8421; display: inline-block; padding: 5px;">
+              <img src="assets/images/subscriptionsLogo.svg" alt="Customer Image" style="height: 40px; width: 40px;">
+            </div>
+            
+            <p class="py-0 font-bold text-[13px] text-[#5b5756] dark:text-[#959eb0] mb-10 ">Subscriptions<br>{{stat?.total_Subscriptions}}</p>
+            <p class="py-0 font-bold text-[13px] text-[#5b5756] dark:text-[#959eb0]-5" >
+              {{stat?.new_subscriptions}} <span >New</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="box border " style="background-color:#fde7e2;height:200px; width:200px; ">
+            <div style="background-color: #fd552e; display: inline-block; padding: 5px;">
+            <img src="assets/images/wproducts.png" alt="Customer Image" style="height: 40px; width: 40px;">
+            </div>
+            <p class="py-0 font-bold text-[13px] text-[#5b5756] dark:text-[#959eb0] mb-10 ">Products<br>{{stat?.total_products}}</p>
+            <p class="py-0 font-bold text-[13px] text-[#5b5756] dark:text-[#959eb0]-5" >
+              {{stat?.new_products}} <span >New</span></p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="box border " style="background-color: #d7f3ef; height:200px; width:200px;">
+            <div style="background-color: #1ab6c4; display: inline-block; padding: 5px;">
+            <img src="assets/images/winvoice.png" alt="Customer Image" style="height: 40px; width: 40px;">
+            </div>
+            <p class="py-0 font-bold text-[13px] text-[#5b5756] dark:text-[#959eb0] mb-10 ">Unpaid invoice<br>{{stat?.total_unpaid_invoices}}</p>
+            <p class="py-0 font-bold text-[13px] text-[#5b5756] dark:text-[#959eb0]-5" >
+              {{stat?.new_unpaid_invoices}} <span >New</span></p>
+          </div>
+        </div>
+      </div>
+
+      <h5 class="pb-3 mt-4"><b>Signups</b></h5>
+      <div class="table-responsive bg-white">
+        <table class="table  mb-3">
+          <thead>
+            <tr>
+              <th scope="col" style="text-transform: uppercase;">Today</th>
+              <th scope="col" style="text-transform: uppercase;">Yesterday</th>
+              <th scope="col" style="text-transform: uppercase;">This Month</th>
+            </tr>
+          </thead>
+          <tbody>
+              <td><b>{{sign?.today}}</b></td>
+              <td><b>{{sign?.yesterday}}</b></td>
+              <td><b>{{sign?.this_month}}</b></td>
+
+            
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </div>
