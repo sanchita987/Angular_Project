@@ -1,20 +1,28 @@
 import { Component,OnInit } from '@angular/core';
-import { CustomerService } from '../customer.service';
-import { Route, Router, RouterModule } from '@angular/router';
+import {  Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormArray, FormGroup , FormBuilder } from '@angular/forms';
+import { FormGroup , FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { SubscriptionService } from '../subscription.service';
+import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
+import { MatOptionModule } from '@angular/material/core';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-create-subscription',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule, MatAutocompleteModule],
   templateUrl: './create-subscription.component.html',
   styleUrl: './create-subscription.component.css'
 })
 export class createSubscriptionComponent implements OnInit  { 
+  hasPlansForSelectedProduct: boolean = false;
+  relationships: any = [];
+  plans: any[] = [];
+  products: any = [];
   customers: any = [];
+  filteredCustomers: any = [];
   subscriptionForm: FormGroup = new FormGroup({}); 
   numbersArray: number[] = []; 
   constructor(
@@ -27,6 +35,8 @@ export class createSubscriptionComponent implements OnInit  {
   ngOnInit() {
     this.initForm();
     this.loadCustomers();
+    this.loadRelationships();
+    this.loadProduct();
   }
 
   initForm() {
@@ -35,11 +45,19 @@ export class createSubscriptionComponent implements OnInit  {
       subscriber_relation: ['', Validators.required],
       subscriber_name: ['', [Validators.required, Validators.minLength(4)]],
       product_id: [''],
+      price:[''],
+      unit:[''],
+      plan: [''],
+      amount: [''],
+      description: [''],
       plan_number: ['', [Validators.required]],
       invoice_creation_day: [''],
       billing_cycle: [''],
       start_date: [''],
+      interval: [''],
+      unit_price: [''],
       coupons: [''],
+      plan_id:[''],
       invoice_now: [false],
       has_setup_fee: ['']
     });
@@ -47,19 +65,105 @@ export class createSubscriptionComponent implements OnInit  {
 
     this.numbersArray = Array.from({ length: 29 }, (_, i) => i + 1);
   }
-  
-
-  loadCustomers() {
-    this.data.getCusto().subscribe((response: any) => {
-      console.log(response['data'], 'response');
-      this.customers = response['data']['items']; 
-      console.log(this.customers);
+  loadRelationships() {
+    this.data.getSubscriberRelationship().subscribe((response: any) => {
+      this.relationships = response.data;
     });
   }
-  updateSubscriberName(event: any) {
-    const selectedCustomerName = event.target.value;
-    this.subscriptionForm.get('subscriber_name')?.setValue(selectedCustomerName);
+  loadProduct() {
+    let allProducts: any[] = []; 
+  
+    const fetchPageData = (page: number) => {
+      this.data.getProduct(page).subscribe((response: any) => {
+        const items = response['data']['items'];
+        allProducts = allProducts.concat(items);
+        if (response['data']['page'] < response['data']['total_pages']) {
+          fetchPageData(page + 1);
+        } else {
+          console.log(allProducts, 'All products loaded');
+          this.products = allProducts;
+        }
+      });
+    };
+    fetchPageData(1);
   }
+  
+  
+  onProductSelect(event: any): void {
+    const selectedProductId = event.target.value;
+  
+    this.data.getProductDetails(selectedProductId).subscribe((response: any) => {
+      console.log('Selected Product Details:', response.data);
+      const filteredPlans = response.data.plans.filter((plan: any) => plan.status === true);
+      const hasPlans = filteredPlans.length > 0;
+      
+      console.log('Plans:', hasPlans);
+      this.hasPlansForSelectedProduct = hasPlans;
+  
+      if (hasPlans) {
+        this.plans = filteredPlans;
+        console.log('Filtered Plans:', this.plans);
+      }
+    });
+  }
+  
+  loadCustomers() {
+    const customerName = '';
+    let allCustomers: any[] = [];
+  
+    const fetchPageData = (page: number) => {
+      this.data.getCusto(customerName, page).subscribe((response: any) => {
+        const items = response['data']['items'];
+        allCustomers = allCustomers.concat(items);
+        this.customers = allCustomers;
+        this.filteredCustomers = this.customers;
+        if (response['data']['page'] < response['data']['total_pages']) {
+          fetchPageData(page + 1);
+        }
+      });
+    };
+    fetchPageData(1);
+  }
+  
+  
+  
+  filterCustomers(event: any) {
+    const inputValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    if (inputValue === '') {
+      this.filteredCustomers = this.customers;
+    } else {
+      this.filteredCustomers = this.customers.filter((customer: any) => 
+        customer.first_name.toLowerCase().includes(inputValue)
+      );
+    }
+  }
+  updateSubscriberName(event: MatAutocompleteSelectedEvent): void {
+    const page = 1;
+    const selectedCustomerName = event.option.value;
+    if (selectedCustomerName) {
+      this.subscriptionService.getCusto(selectedCustomerName, page).subscribe({
+        next: (customer) => {
+          this.subscriptionForm.patchValue({
+            subscriber_name: selectedCustomerName,
+            subscriber_relation: 'self'
+          });
+        },
+        error: (error) => {
+          console.error('Error fetching customer data:', error);
+        }
+      });
+    }
+  }
+
+  onPlanSelected(plan: any): void {
+    this.subscriptionForm.patchValue({
+      price: plan.price,
+      interval: plan.interval,
+      description: plan.description,
+      amount : plan.price 
+    });
+  }  
+
 
   onSubscriptionRegister(): void {
     const subscriptionData = this.subscriptionForm.value;
@@ -67,11 +171,9 @@ export class createSubscriptionComponent implements OnInit  {
       .subscribe({
         next: (response: any) => {
           console.log('Subscription Register successful:', response);
-          // Handle success
         },
         error: (error: any) => {
           console.error('Error occurred during subscription registration:', error);
-          // Handle error
         }
       });
   }

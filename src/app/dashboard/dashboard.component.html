@@ -1,122 +1,123 @@
-
-  <div class="row mt-5">
-    <div class="col-md-7">
-      <div class="table-responsive bg-white">
+<div class="row mt-5">
+  <div class="col-md-7">
+    <div class="table-responsive bg-white ">
+      <div class="box mb-2">
+      <h5 class="custome-heading"><b>Plan summary</b></h5>
         <table class="table mb-0 mb-4">
           <thead>
-            <h5 class="mb-3"><b>Plan summary</b></h5>
             <tr>
-              <th scope="col" style="text-transform: uppercase;">Plan name</th>
-              <th scope="col" style="text-transform: uppercase;">Quantity</th>
-              <th scope="col" style="text-transform: uppercase;">Amount</th>
+              <th scope="col">Plan name</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Amount</th>
             </tr>
           </thead>
-          <tbody>
-            <tr *ngFor="let post of posts">
-              <td>{{post.plan_name}}</td>
-              <td>{{post.quantity}}</td>
-              <td>{{post.amount}}</td>
-            </tr>
-          </tbody>
+          <tr *ngFor="let post of posts">
+            <td>{{post.plan_name}}</td>
+            <td>{{post.quantity}}</td>
+            <td>{{post.amount}}</td>
+          </tr>
         </table>
+        </div>
       </div>
-
-      <h5 class="pb-3"><b>Subscription summary</b></h5>
-      <br>
       <div class="table-responsive bg-white">
-        <table class="table  mb-4">
-          <div class="table-responsive" style="height:400px">
-          <thead>
-            <tr>
-              <th scope="col" style="text-transform: uppercase;">Date</th>
-              <th scope="col" style="text-transform: uppercase;">Signups</th>
-              <th scope="col" style="text-transform: uppercase;">Activation</th>
-              <th scope="col" style="text-transform: uppercase;">cancellations</th>
-              <th scope="col" style="text-transform: uppercase;">Customers</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let post of subs">
-              <td>{{post.date}}</td>
-              <td>{{post.signups}}</td>
-              <td>{{post.activation}}</td>
-              <td>{{post.cancellations}}</td>
-              <td>{{post.customers}}</td>
-            </tr>
-          </tbody>
+    <table class="table mb-0 mb-4 h-50">
+      <div class="box">
+        <h5 class="custome-heading"><b>Subscription summary</b></h5>
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Signups</th>
+            <th scope="col">Activation</th>
+            <th scope="col">cancellations</th>
+            <th scope="col">Customers</th>
+          </tr>
+        </thead>
+        <tr *ngFor="let post of subs">
+          <td>{{post.date}}</td>
+          <td>{{post.signups}}</td>
+          <td>{{post.activation}}</td>
+          <td>{{post.cancellations}}</td>
+          <td>{{post.customers}}</td>
+        </tr>
+      </div>
+    </table>
+  </div>
+  </div>
+  <div class="col-md-4">
+    <div class="row mb-3 ">
+      <div class="col-md-6">
+        <div class="box" style="background-color:#f1f2ff; height:200px; width:200px;">
+          <div class="purple">
+            <img src="assets/images/wcustomers.png" class="image" alt="Customer Image">
           </div>
-        </table>
+          <p class="py-0 font-bold text-[13px] text-[#5b5756] dark:text-[#959eb0] mb-10 ">Customers<br>
+            <span class="number">{{stat?.total_customers}}</span></p>
+          <p class="py-0 font-bold text-[13px] text-[#5b5756] dark:text-[#959eb0]-5">
+            {{stat?.new_customers}} <span>New</span></p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="box" style="background-color: #fef4e2; height:200px; width:200px;">
+          <div  class="orange">
+            <img src="assets/images/wsubscriptions.png" alt="Customer Image" class="image">
+          </div>
+
+          <p class="py-0 font-bold text-[13px] text-[#5b5756] dark:text-[#959eb0] mb-10 ">
+            Subscriptions<br>
+            <span class="number">{{stat?.total_Subscriptions}}</span></p>
+          <p class="py-0 font-bold text-[13px] text-[#5b5756] dark:text-[#959eb0]-5">
+            {{stat?.new_subscriptions}} <span>New</span></p>
+        </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="row mb-3 ">
-        <div class="col-md-6">
-          <div class="box border" style="background-color:#f1f2ff; height:200px; width:200px;">
-            <div style="background-color: #7a70ee; display: inline-block; padding: 5px;">
-            <img src="assets/images/wcustomers.png" alt="Customer Image" style="height: 40px; width: 40px;">
-            </div>
-            <p class="py-0 font-bold text-[13px] text-[#5b5756] dark:text-[#959eb0] mb-10 ">Customers<br>
-              {{stat?.total_customers}}</p>
-              <p class="py-0 font-bold text-[13px] text-[#5b5756] dark:text-[#959eb0]-5" >
-                {{stat?.new_customers}} <span >New</span></p>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="box" style="background-color:#fde7e2;height:200px; width:200px; ">
+          <div  class="red">
+            <img src="assets/images/wproducts.png" alt="Customer Image" class="image">
           </div>
-        </div>
-        <div class="col-md-6">
-          <div class="box border" style="background-color: #fef4e2; height:200px; width:200px;">
-            <div style="background-color: #ff8421; display: inline-block; padding: 5px;">
-              <img src="assets/images/subscriptionsLogo.svg" alt="Customer Image" style="height: 40px; width: 40px;">
-            </div>
-            
-            <p class="py-0 font-bold text-[13px] text-[#5b5756] dark:text-[#959eb0] mb-10 ">Subscriptions<br>{{stat?.total_Subscriptions}}</p>
-            <p class="py-0 font-bold text-[13px] text-[#5b5756] dark:text-[#959eb0]-5" >
-              {{stat?.new_subscriptions}} <span >New</span></p>
-          </div>
+          <p class="py-0 font-bold text-[13px] text-[#5b5756] dark:text-[#959eb0] mb-10 ">
+            Products<br>
+            <span class="number">{{stat?.total_products}}</span></p>
+          <p class="py-0 font-bold text-[13px] text-[#5b5756] dark:text-[#959eb0]-5">
+            {{stat?.new_products}} <span>New</span></p>
         </div>
       </div>
-
-      <div class="row">
-        <div class="col-md-6">
-          <div class="box border " style="background-color:#fde7e2;height:200px; width:200px; ">
-            <div style="background-color: #fd552e; display: inline-block; padding: 5px;">
-            <img src="assets/images/wproducts.png" alt="Customer Image" style="height: 40px; width: 40px;">
-            </div>
-            <p class="py-0 font-bold text-[13px] text-[#5b5756] dark:text-[#959eb0] mb-10 ">Products<br>{{stat?.total_products}}</p>
-            <p class="py-0 font-bold text-[13px] text-[#5b5756] dark:text-[#959eb0]-5" >
-              {{stat?.new_products}} <span >New</span></p>
+      <div class="col-md-6">
+        <div class="box" style="background-color: #d7f3ef; height:200px; width:200px;">
+          <div class="blue">
+            <img src="assets/images/winvoice.png" alt="Customer Image" class="image">
           </div>
-        </div>
-        <div class="col-md-6">
-          <div class="box border " style="background-color: #d7f3ef; height:200px; width:200px;">
-            <div style="background-color: #1ab6c4; display: inline-block; padding: 5px;">
-            <img src="assets/images/winvoice.png" alt="Customer Image" style="height: 40px; width: 40px;">
-            </div>
-            <p class="py-0 font-bold text-[13px] text-[#5b5756] dark:text-[#959eb0] mb-10 ">Unpaid invoice<br>{{stat?.total_unpaid_invoices}}</p>
-            <p class="py-0 font-bold text-[13px] text-[#5b5756] dark:text-[#959eb0]-5" >
-              {{stat?.new_unpaid_invoices}} <span >New</span></p>
-          </div>
+          <p class="py-0 font-bold text-[13px] text-[#5b5756] dark:text-[#959eb0] mb-10 ">Unpaid
+            invoice<br>
+            <span class="number">{{stat?.total_unpaid_invoices}}</span></p>
+          <p class="py-0 font-bold text-[13px] text-[#5b5756] dark:text-[#959eb0]-5">
+            {{stat?.new_unpaid_invoices}} <span>New</span></p>
         </div>
       </div>
+    </div>
 
-      <h5 class="pb-3 mt-4"><b>Signups</b></h5>
-      <div class="table-responsive bg-white">
-        <table class="table  mb-3">
-          <thead>
-            <tr>
-              <th scope="col" style="text-transform: uppercase;">Today</th>
-              <th scope="col" style="text-transform: uppercase;">Yesterday</th>
-              <th scope="col" style="text-transform: uppercase;">This Month</th>
-            </tr>
-          </thead>
-          <tbody>
-              <td><b>{{sign?.today}}</b></td>
-              <td><b>{{sign?.yesterday}}</b></td>
-              <td><b>{{sign?.this_month}}</b></td>
+    <h5 class="custome-heading mb-2 mt-3"><b>Signups</b></h5>
+    <div class="table-responsive bg-white">
+      <div class="box">
+      <table class="table  mb-3">
+        <thead>
+          <tr>
+            <th scope="col">Today</th>
+            <th scope="col">Yesterday</th>
+            <th scope="col">This Month</th>
+          </tr>
+        </thead>
+        <tbody>
+          <td><b>{{sign?.today}}</b></td>
+          <td><b>{{sign?.yesterday}}</b></td>
+          <td><b>{{sign?.this_month}}</b></td>
 
-            
-          </tbody>
-        </table>
+
+        </tbody>
+      </table>
       </div>
-
     </div>
 
   </div>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { PaymentService } from '../payment.service';
 import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-payment',
   standalone: true,
@@ -9,6 +10,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './payment.component.html',
   styleUrl: './payment.component.css'
 })
+
 export class PaymentComponent {
   payment : any = {
     data: { items: [] }

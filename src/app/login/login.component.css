@@ -14,3 +14,10 @@
     cursor: pointer;
     color: #605a5a;
   }
+.custom-span{
+  color: rgb(149, 147, 147);
+}
+.required:after {
+  content: " *";
+  color:red;
+}

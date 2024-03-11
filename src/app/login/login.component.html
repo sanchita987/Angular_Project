@@ -1,23 +1,26 @@
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid" style="height: 100%;">
+  <div class="row" style="height: 100%;">
     <div class="col-md-7" style="padding: 0; position: relative;">
-      <div style="background-color: #f0f3fc; position: relative; height: 104%; width: 100%; display: flex; justify-content: center; align-items: center;">
-        <img src="assets/images/background2.png" alt="login" style="width: 50%; height: 50%; object-fit: cover;">
+      <div style="background-color: #f0f3fc; position: relative; height: 100%; width: 100%; display: flex; justify-content: center; align-items: center;">
+        <img src="assets/images/background2.png" alt="login" style="width: 50%; height: 50%; object-fit: contain;">
         <img src="assets/images/companylogo.webp" alt="company-logo" style="position: absolute; top: 0; left: 0;">
       </div>
     </div>
     
-    <div class="col-md-4">
+    <div class="col-md-4 pt-5 ml-5">
       <div class="container py-5 h-100">
-          <h5 class="mb-5 custom-heading">Welcome to CRM portal</h5>
-          <form [formGroup]="loginForm">
+        <div class="form-group mb-20">
+          <h2 >Welcome to CRM portal</h2>
+          <span class="custom-span mt-5">Enter your credentials to access <br>your account</span>
+          </div>
+          <form [formGroup]="loginForm" >
             <div *ngIf="errorResponse" class="alert alert-danger">
               {{errorResponse}}
             </div>
-            <div class="form-outline mb-5">
-              <label class="form-label ml-25" for="typeEmailX-2"><i class="fa fa-user"
-                  aria-hidden="true"></i>Email</label>
-              <input type="email" id="typeEmailX-2" class="form-control form-control-lg" name="email"
+            <div class="form-outline mb-15">
+              <div class="form-group">
+              <label class="form-label ml-25 " for="typeEmailX-2" class="required">Email</label>
+              <input type="email" id="typeEmailX-2" class="form-control " name="email"
                 formControlName="email">
               <div
                 *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)"
@@ -33,11 +36,10 @@
 
 
             <div class="form-outline mb-5">
-              <label class="form-label" for="typePasswordX-2"><i class="fa fa-key"
-                  aria-hidden="true"></i>Password</label>
+              <label class="form-label" for="typePasswordX-2" class="required">Password</label>
               <div class="password-input-container">
                 <input type="{{ hidePassword ? 'password' : 'text' }}" id="typePasswordX-2"
-                  class="form-control form-control-lg" name="password" formControlName="password"><i class="fa fa-eye"
+                  class="form-control" name="password" formControlName="password"><i class="fa fa-eye"
                   (click)="togglePasswordVisibility()"></i>
               </div>
               <div
@@ -51,12 +53,15 @@
                 </div>
               </div>
             </div>
-            <button class="btn btn-primary btn-lg btn-block mb-4" type="submit" [disabled]="!loginForm.valid"
-              (click)="onSubmit()">Login <i class="fa fa-sign-in" aria-hidden="true"></i></button>
-            <small class="small"><a [routerLink]="['/forgot-password/']">Forgot password</a></small>
-          </form>
+            <div class="container mb-3" >
+            <span><a [routerLink]="['/forgot-password/']">Forgot password?</a></span>
+            </div>
+            </div>
 
-          <hr class="my-4">
+            <button class="btn btn-primary  btn-block mt-10" type="submit" [disabled]="!loginForm.valid"
+              (click)="onSubmit()">Login <i class="fa fa-sign-in" aria-hidden="true"></i></button>
+          </form>
       </div>
     </div>
   </div>
+  

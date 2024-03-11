@@ -1,0 +1,31 @@
+thead th {
+    top: 0;
+    background-color: #FAFAFA;
+  }
+  
+  table th {
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+  
+  .table td,
+  .table th {
+    border: none;
+  }
+  .table  tr {
+    border-bottom: 1px solid #ececec; 
+    padding:15px !important;
+  }
+  .no-wrap {
+    white-space: nowrap;
+  }
+  .truncate-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: 12em;
+  }
+ 
+  
+  

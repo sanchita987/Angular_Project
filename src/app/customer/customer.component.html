@@ -1,20 +1,24 @@
-<div class="row  pl-5">
-  <div class="table-responsive">
-    <div class=" col-12 overflow-y">
-      <h5 class=" pb-3"><b>Customer Details</b></h5>
+
 <!---serch buttons-->
-<div class="container">
-  <div class="row align-items-center justify-content-end">
-    <div class="col-auto">
-      <div class="form-group mr-0">
-        <label for="search">Search</label>
-        <input id="search" (keyup)="searchData($event)" class="form-control" type="text" name="search">
+<div class="container mt-4">
+  <div class="row align-items-center justify-content-end p-0">
+    <div class="col-auto mr-auto">
+      <div class="form-group-0">
+        <h2><b>Customers</b></h2>
       </div>
     </div>
-    <div class="col-auto">
-      <div class="form-group">
-        <label for="selectElement">Select an option:</label>
-        <select (change)="filterData($event)" name="selectElement" id="selectElement" class="form-control">
+    <div class="col-auto px-1">
+      <div class="form-group mr-0">
+        <div style="position: relative;">
+          <input id="search" (keyup)="searchData($event)" class="form-control" type="text" name="search"  aria-label="Select an option" placeholder="Search..">
+        <i class="fas fa-search search-icon"></i>
+      </div>
+    </div>
+    </div>
+    <div class="col-auto px-1">
+      <div class="form-group mr-0">
+        <select (change)="filterData($event)" name="selectElement" id="selectElement" class="form-control"  aria-label="Select an option" >
+          <option>Filter</option>
           <option value="all">All</option>
           <option value="inactive">Inactive</option>
           <option value="active">Active</option>
@@ -25,32 +29,33 @@
         </select>
       </div>
     </div>
-    <div class="col-auto">
-      <a [routerLink]="['/admin/customer-register']" class="btn btn-info mt-2"><i class="fa-solid fa-plus mr-1"></i>Add new</a>
+    <div class="col-auto px-1">
+      <div class="form-group mr-0">
+        <button type="button" [routerLink]="['/admin/customer-register']" class="btn btn-primary" >
+          <i class="fa-solid fa-plus mr-1"></i>Add new
+        </button>        
+    </div>
     </div>
   </div>
 </div>
 
-      
-      
-      <table class="table">
-        <thead class="sticky-header">
+      <table class="table mb-0">
+        <thead>
           <tr>
             <th scope="col" (click)="toggleSortOrder('customer_number')" class="sortable-header">Customer No</th>
-            <th scope="col" (click)="toggleSortOrder('first_name')" class="sortable-header">First Name</th>
+            <th scope="col" (click)="toggleSortOrder('first_name')" class="sortable-header">Name</th>
             <th scope="col" (click)="toggleSortOrder('email')" class="sortable-header pl-4px">Email</th>
             <th scope="col" (click)="toggleSortOrder('phone')" class="sortable-header">Phone</th>
             <th scope="col" (click)="toggleSortOrder('total_due_amount')" class="sortable-header">Due amount</th>
             <th scope="col" (click)="toggleSortOrder('excess_credit')" class="sortable-header">Excess Credit</th>
             <th scope="col" (click)="toggleSortOrder('is_active')" class="sortable-header">Status</th>
             <th scope="col">Action</th>
-            <th scope="col">Edit</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let post of customers.items ">
             <td>{{post.customer_number}}</td>
-            <td>{{post.first_name}}</td>
+            <td>{{ truncateText(post.first_name) }}</td>
             <td>{{post.email}}</td>
             <td>{{post.phone}}</td>
             <td>
@@ -60,18 +65,23 @@
             <td><span [ngClass]="{'text-success': post.is_active, 'text-danger': !post.is_active}" class="badge bg-light fw-bold">{{post.text}}
             </span></td>
             <td>
-              <a [routerLink]="['/admin/customer', post.id]" class="btn btn-info">Detail</a>
+              <div class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-ellipsis-v text-info dropdown-icon"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a [routerLink]="['/admin/customer', post.id]" class="dropdown-item">Detail</a>
+                  <a [routerLink]="['/admin/customer', post.id, 'update']" class="dropdown-item">Update</a>
+                </div>
+              </div>
             </td>
-            <td>
-              <a [routerLink]="['/admin/customer', post.id, 'update']" class="btn btn-info">Update</a>
-
-            </td>
+            
+               
           </tr>
         </tbody>
       </table>
-    </div>
-  </div>
-</div>
+
+
 
 <!-- Pagination and bootstrap -->
 <div class="pagination">

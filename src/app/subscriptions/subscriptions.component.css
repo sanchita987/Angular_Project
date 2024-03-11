@@ -1,0 +1,41 @@
+thead th {
+    top: 0;
+    background-color: #FAFAFA;
+  }
+  
+  table th {
+    text-transform: uppercase;
+    font-size: 12px;
+    padding:10px !important;
+  }
+  
+  .table td,
+  .table th {
+    border: none;
+  }
+  .table  tr {
+    border-bottom: 1px solid #ececec; 
+    padding:15px !important;
+  }
+  .search-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #aaa;
+    pointer-events: none; 
+  }
+  .form-control {
+    padding-left: 30px;
+  }
+  .dropdown-toggle {
+    border: none !important;
+    background-color: transparent !important;
+  }
+   .dropdown-icon {
+    cursor: pointer;
+  }
+  .no-wrap {
+    white-space: nowrap;
+  }
+  

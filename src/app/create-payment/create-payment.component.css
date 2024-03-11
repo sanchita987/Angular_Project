@@ -2,3 +2,16 @@
     font-size: 14px; 
     font-family: 'Arial', sans-serif;
 }
+.table td,
+.table th {
+  border: none;
+}
+.table  tr {
+  border-bottom: 1px solid #ececec; 
+  padding:25px !important;
+}
+.amount-container {
+    padding-left: 40px;
+
+}
+

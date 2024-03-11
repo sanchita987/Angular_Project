@@ -123,6 +123,7 @@ export class CustomerDetailComponent {
 
       this.customerService.getCustomer(data['id']).subscribe((response: any) => {
         this.customer = response['data'];
+        console.log('customers',this.customer)
       });
 
     })

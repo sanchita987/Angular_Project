@@ -1,18 +1,44 @@
-
-
 body {
-    font-size: 12px; 
-    font-family: 'Arial', sans-serif; 
-  }
-  label {
-    font-size: 12x; 
-    font-family: 'Arial', sans-serif; 
-  }
-  input::placeholder {
-    font-size: 12px;
-    font-family: 'Arial', sans-serif;
-  }
-  
-  
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+  font-size: 5px;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+}
+
+label {
+  font-size: 12x;
+  font-family: 'Arial', sans-serif;
+}
+
+input::placeholder {
+  font-size: 12px;
+  font-family: 'Arial', sans-serif;
+}
+
+
+html,
+body {
+  height: 100%;
+}
+
+
+thead th {
+  top: 0;
+  background-color: #FAFAFA;
+}
+
+table th {
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.table td,
+.table th {
+  border: none;
+}
+.table-row-padding tr {
+  padding: 15px;
+}
+
+.custome-heading {
+  font-size: 14px;
+}

@@ -1,40 +1,49 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AccessTokenInterface, HttpHeadersInterface } from './http-interfaces';
 import { HttpParams } from '@angular/common/http';
+import { environment } from '../environments/environment.development';
 @Injectable({
   providedIn: 'root'
 })
 export class SubscriptionService {
-  private apiUrl = 'https://nitvcrmapi.truestreamz.com/api/v1/subscription';
-  private url = 'https://nitvcrmapi.truestreamz.com/api/v1/customer';
+
+  private apiUrl = environment.apiUrl;
+  private subscriptionUrl = `${this.apiUrl}subscription`;
+  private customerUrl = `${this.apiUrl}customer`;
 
   constructor(private http: HttpClient) { }
-  private getHeaders(): HttpHeadersInterface {
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + localStorage.getItem('access_token')
-    });
-
-    return headers;
-  }
   getsubscription(search:string,filter:string): Observable<any> {
     const params = new HttpParams()
     .set('search', search)
     .set('filter', filter);
-    return this.http.get<any[]>('https://nitvcrmapi.truestreamz.com/api/v1/subscription', {params: params,
-      //params: { page: 1 },
-      headers : this.getHeaders() 
-    });
+    return this.http.get<any[]>(this.subscriptionUrl, { params });
   }
-registerSubscription(registerSubscription: any): Observable<any> {
-  return this.http.post<any>(this.apiUrl, registerSubscription, { headers: this.getHeaders() });
-}
-getCusto(): Observable<any> {
-  return this.http.get<any>(this.url, { headers: this.getHeaders() });
-}
 
-}
+  registerSubscription(registerSubscription: any): Observable<any> {
+    return this.http.post<any>(`${this.subscriptionUrl}/calculate`, registerSubscription);
+  }
 
+  getCusto(customerName: string, page: number): Observable<any> {
+    const params = new HttpParams()
+    .set('first_name', customerName)
+    .set('page', page.toString());
+    return this.http.get<any>(this.customerUrl, { params });
+  }
+
+  getSubscriberRelationship(): Observable<any> {
+    return this.http.get<any[]>(`${this.subscriptionUrl}/relationships`);
+  }
+
+  getProduct(page?: number): Observable<any> {
+    let params = new HttpParams();
+    if (page) {
+      params = params.set('page', page.toString());
+    }
+    return this.http.get<any>(`${this.apiUrl}product`, { params });
+  }
+  
+  getProductDetails(id: number): Observable<any> {
+    return this.http.get<any[]>(`${this.apiUrl}product/${id}`);
+  }
+}

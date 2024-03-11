@@ -1,28 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient,  HttpParams } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AccessTokenInterface, HttpHeadersInterface } from './http-interfaces';
-
+import { environment } from '../environments/environment.development';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
-  private apiUrl = 'https://nitvcrmapi.truestreamz.com/api/v1/customer';
-  private registerUrl = 'https://nitvcrmapi.truestreamz.com/api/v1/customer/register';
+  private apiUrl = environment.apiUrl;
+  private registerUrl = `${this.apiUrl}customer/register`;
 
 
   constructor(private http: HttpClient) { }
-
-  private getHeaders(): HttpHeadersInterface {
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + localStorage.getItem('access_token')
-    });
-    return headers;
-  }
   getCustomers(page: number, sortBy: string, sortOrder: string, search: string, filter: string): Observable<any> {
     const params = new HttpParams()
       .set('page', page.toString())
@@ -31,7 +21,7 @@ export class CustomerService {
       .set('sort_order', 'desc')
       .set('filter', filter);
 
-    return this.http.get<any>(this.apiUrl, { params: params, headers: this.getHeaders() })
+    return this.http.get<any>(`${this.apiUrl}customer`, { params: params })
       .pipe(
         map((data: any) => {
           data['data']['items'].forEach((element: any) => {
@@ -42,40 +32,39 @@ export class CustomerService {
       );
   }
   getPostalCodeData(code: string): Observable<any> {
-    return this.http.get<any>('https://nitvcrmapi.truestreamz.com/api/v1/postal_codes/' + code, { headers: this.getHeaders() });
+    return this.http.get<any>('${this.apiUrl}postal_codes/${code}');
   }
 
 
   getCusto(): Observable<any> {
-    return this.http.get<any>(this.apiUrl, { headers: this.getHeaders() });
+    return this.http.get<any>(`${this.apiUrl}customer`);
   }
 
   getProvinceData(): Observable<any> {
-    return this.http.get<any>('https://nitvcrmapi.truestreamz.com/api/v1/postal_codes/list-view/prefecture', { headers: this.getHeaders() });
+    return this.http.get<any>(`${this.apiUrl}postal_codes/list-view/prefecture`);
   }
 
   getCityList(prefecture: string): Observable<any> {
     console.log(prefecture, "p")
-    return this.http.get<any>('https://nitvcrmapi.truestreamz.com/api/v1/postal_codes/city-list/' + prefecture, { headers: this.getHeaders() });
+    return this.http.get<any>(`${this.apiUrl}postal_codes/city-list/${prefecture}`);
   }
   getAddressList(city: string): Observable<any> {
-    return this.http.get<any>('https://nitvcrmapi.truestreamz.com/api/v1/postal_codes/town-list/' + city, { headers: this.getHeaders() });
+    return this.http.get<any>(`${this.apiUrl}postal_codes/town-list/${city}`);
   }
 
   getCustomer(id: number): Observable<any> {
-    const url = `${this.apiUrl}/${id}`;
-    return this.http.get<any>(url, { headers: this.getHeaders() });
+    return this.http.get<any>(`${this.apiUrl}customer/${id}`);
   }
 
   getContact(c_id: number, formData: any): Observable<any> {
-    const url = `${this.apiUrl}/${c_id}/contacts`;
-    return this.http.post<any>(url, formData, { headers: this.getHeaders() });
+    const url = `${this.apiUrl}customer/${c_id}/contacts`;
+    return this.http.post<any>(url, formData);
   }
 
 
   deleteContact(customer_id: number, contact_id: number): Observable<any> {
-    const url = `${this.apiUrl}/${customer_id}/contacts/${contact_id}`;
-    return this.http.delete(url, { headers: this.getHeaders() });
+    const url = `${this.apiUrl}customer/${customer_id}/contacts/${contact_id}`;
+    return this.http.delete(url);
   }
 
   register(data: any, frontFile: File, backFile: File) {
@@ -90,20 +79,19 @@ export class CustomerService {
     formData.append('customer_type', data.customer_type);
     formData.append('residence_card_front', frontFile);
     formData.append('residence_card_back', backFile);
-
-    return this.http.post(this.registerUrl, formData, { headers: this.getHeaders() });
+    return this.http.post(`${this.registerUrl}`, formData);
   }
 
   updateCustomer(id: number, updatedData: any, frontFile?: File, backFile?: File): Observable<any> {
-    const url = `${this.apiUrl}/${id}`;
+    const url = `${this.apiUrl}customer/${id}`;
     const formData = new FormData();
     updatedData.id = id;
     formData.append('id', id.toString());
     formData.append('first_name', updatedData.first_name);
-    formData.append('customer_number',updatedData.customer_number );
+    formData.append('customer_number', updatedData.customer_number);
     formData.append('last_name', updatedData.last_name);
     formData.append('email', updatedData.email);
-    formData.append('customer_type', updatedData.customer_type );
+    formData.append('customer_type', updatedData.customer_type);
     if (frontFile) {
       formData.append('residence_card_front', frontFile);
     }
@@ -114,7 +102,7 @@ export class CustomerService {
     formData.append('province', updatedData.province);
     formData.append('city', updatedData.city);
     formData.append('address', updatedData.address);
-    return this.http.put<any>(url, formData, { headers: this.getHeaders() });
+    return this.http.put<any>(url, formData);
   }
 
 

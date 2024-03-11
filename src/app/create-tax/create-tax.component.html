@@ -1,5 +1,11 @@
-<form [formGroup] = "taxForm"  >
-    <h5 class=" pb-3" display-6><b>Add Tax</b></h5>
+<div class="col-auto mr-auto mt-2 ">
+  <div class="form-group-0">
+    <h2><b>Add Tax</b></h2>
+  </div>
+</div>
+<form [formGroup] = "taxForm">
+    <div class="row">
+    <div class="form-outline mb-2 col">
     <div class="form-group">
       <label for="taxName">Name</label>
       <input type="text" id="taxName" name="taxName" class="form-control" formControlName="name" placeholder="Name" required>
@@ -9,8 +15,8 @@
         </div>
     </div>
     </div>
-  
-    <div class="form-group">
+    </div>
+    <div class="form-outline mb-2 col">
       <label for="taxRate">Rate</label>
       <input type="number" id="taxRate" name="taxRate" class="form-control" placeholder="rate" required formControlName="rate"> 
       <div *ngIf="rate?.invalid && (rate?.dirty ||rate?.touched)" class="alert alert-danger">
@@ -19,10 +25,10 @@
         </div>
     </div>
     </div>
-  
+  </div>
     <div class="form-group">
       <label for="taxDescription">Description</label>
-      <textarea id="taxDescription" name="taxDescription" class="form-control" formControlName="description" placeholder="description"></textarea>
+      <textarea id="taxDescription" name="taxDescription" class="form-control w-50" formControlName="description" placeholder="descriptions.."></textarea>
       <div *ngIf="description?.invalid && (description?.dirty ||description?.touched)" class="alert alert-danger">
         <div *ngIf="description?.errors?.['required']">
             Description is required.
@@ -31,8 +37,7 @@
     </div>
   
     <div class="form-group">
-      <button type="button" class="btn btn-light mr-3">Cancel</button>
-      <button type="button" class="btn btn-info"(click)="ontaxRegister()" routerLink="tax">Save</button>
+      <button type="button" class="btn btn-primary" style="width: 200px;" (click)="ontaxRegister()" routerLink="tax">Save</button>
     </div>
   </form>
   

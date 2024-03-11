@@ -1,18 +1,23 @@
 
-<div class="row  pl-5">
-    <div class="col-12">
-      <h5 class="pb-3"><b>Invoice Details</b></h5>
-      <div class="row justify-content-end">
-        <div class="col-auto">
-          <a [routerLink]="['/admin/invoice-register']" class="btn btn-info"><i class="fa-solid fa-plus mr-1"></i>Add new</a>
-        </div>
-        </div>
+<div class="container p-4">
+        <div class="row align-items-center justify-content-end p-0">
+          <div class="col-auto mr-auto mt-2 ">
+              <div class="form-group-0">
+                <h2><b>Invoice Details</b></h2>
+              </div>
+            </div>
+            <div class="col-auto px-1">
+              <div class="form-group mr-0">
+                  <button type="button" class="btn btn-primary" [routerLink]="['/admin/invoice-register']">
+                      <i class="fa-solid fa-plus mr-1"></i>Add new
+                  </button>
+              </div>
+            </div>
+            </div>
       
-            <table class="table">
-              <thead class=" sticky-header">
-          
-
-                <tr>
+            <table class="table ">
+              <thead>
+                  <tr>
                   <th scope="col">Invoice Number</th>
                   <th scope="col">Date</th> 
                   <th scope="col">Due Date</th> 
@@ -26,28 +31,30 @@
               </thead>
               <tbody>
                 <tr *ngFor="let post of invoice.items">
-                  <td>{{post.number}}</td>
-                  <td>{{post.invoice_date}}</td>
-                  <td>{{post.invoice_due_date}}</td>
+                  <td class="no-wrap">{{post.number}}</td>
+                  <td class="no-wrap">{{post.invoice_date}}</td>
+                  <td class="no-wrap">{{post.invoice_due_date}}</td>
                   <td>{{post.customer.first_name}}</td>
                   <td>{{post.customer.last_name}}</td>
                   <td>{{post.total}}</td>
                   <td>{{post.due_amount}}</td>
                   <td>
-                  <span [ngClass]="{'text-success': post.status === 'paid', 'text-danger': post.status === 'overdue'}" class="badge bg-light fw-bold">
+                  <span [ngClass]="{'text-success': post.status === 'paid',  'text-warning': post.status === 'partially_paid', 'text-danger': post.status === 'overdue', 'text-info': post.status === 'sent'}" class="badge bg-light fw-bold">
                     {{ post.status_description }}
                   </span>
                   </td>
-                  
                   <td>
-                    <a [routerLink]="['/admin/invoice', post.id]" class="btn btn-info">Detail</a>
+                    <div class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" [routerLink]="['/admin/invoice', post.id]">Detail</a>
+                      </div>
+                    </div>
                   </td>
- 
-                  <td>
                   </tr>
               </tbody>
             </table>
           </div>
-        </div>
       
       

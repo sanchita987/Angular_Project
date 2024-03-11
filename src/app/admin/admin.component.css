@@ -11,6 +11,8 @@
 
   .navbar {
     align-items: flex-start;
+    position: fixed;
+    transition: width 0.3s ease-in-out;
   }
 
   .navbar-brand {
@@ -37,12 +39,92 @@
     transition: all 0.3s ease-in-out;
   }
   
-  .shrink {
-    height: 50px;
+  .company-image{
+    height:15px;
+    width:15px;
+    color: transparent;
   }
-  .grown {
-    font-size: 20px;
+  .dashboard-image{
+    height: 15px;
+     width: 15px;
   }
+  .box-image, .logout{
+    height: 20px; 
+    width: 20px;
   }
+  .customer-image , .subscription-image, .payment-image, .user-image, .invoice-image, .tax-image, .menu{
+    height: 25px; width: 25px;
+    color: transparent;
+  }
+  .nav-images{
+    display: flex; align-items: center;
+  }
+  .images{
+    display: flex;  align-items: center; margin-left: auto;
+  }
+  .nav-image{
+    height: 30px; width: 30px; margin-right: 10px;
+  }
+
+.bs-side-navbar .navbar-nav .nav-link {
+  display: none;
+}
+
+.bs-side-navbar.collapsed .navbar-nav .nav-link {
+  display: block;
+}
+
+.bs-side-navbar:not(.collapsed) .navbar-nav .nav-link {
+  display: block;
+}
+
+.bs-side-navbar:not(.collapsed) {
+  width: 200px; 
+}
+.hide-content {
+  visibility: hidden;
+}
+
+.menu {
+  cursor: pointer;
+}
+.expanded {
+  flex: 0 0 200px;
+}
+.shrink {
+  width: 50px;
+  height: auto; 
+}
+
+.expanded-layout {
+  width: calc(100% - 250px); 
+  margin-right: auto;
+}
+
+.collapsed-layout {
+  width: 100%;
+}
+.dropdown-item {
+  cursor: pointer;
+}
+.active, .active-icon {
+  color:var(--primary) !important;
+}
+.active:hover {
+  color:var(--primary) !important;
+}
+.navbar-box {
+  border-right: 1px solid #cccccc5f;
+  border-radius: 5px; 
+  padding: 5px;
+}
+.border-bottom {
+  border-bottom: 1px solid #cccccc5f;
+  padding :5px
+
+}
+
+
+}
   
 

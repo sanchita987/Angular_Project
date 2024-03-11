@@ -30,6 +30,10 @@ export class CustomerComponent implements OnInit {
   updatedData: any;
   customer_registerForm: any;
 
+  truncateText(text: string, maxLength: number = 20): string {
+    return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+  }
+
   constructor(private data: CustomerService, private router: Router) { }
 
   ngOnInit() {

@@ -1,29 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable , map} from 'rxjs';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AccessTokenInterface, HttpHeadersInterface } from './http-interfaces';
+import { HttpClient} from '@angular/common/http';
+import { map,Observable } from 'rxjs';
+import { environment } from '../environments/environment.development';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaymentService {
-
+  private apiUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
-  private getHeaders(): HttpHeadersInterface {
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + localStorage.getItem('access_token')
-    });
 
-    return headers;
-  }
   getpayment() {
-    
-    return this.http.get<any[]>('https://nitvcrmapi.truestreamz.com/api/v1/payment', {
-      //params: { page: 1 },
-      headers : this.getHeaders() 
-    }).pipe(
+    return this.http.get<any[]>(environment.apiUrl + 'payment').pipe(
       map((data: any) => {
         data['data']['items'].forEach((element: any) => {
           element.text = element.status ? 'success' : 'failed';
@@ -31,6 +20,18 @@ export class PaymentService {
         return data;
       })
     );
+  }
+getCusto(customerName: string, page: number): Observable<any> {
+    const params = new HttpParams()
+    .set('first_name', customerName)
+    .set('page', page.toString());
+    return this.http.get<any>(`${this.apiUrl}customer`, { params });
+  }
+  getPaymentmode(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}payment_mode`);
+  }
+  getInvoiceByCustomerId(customerId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}invoice?page=1&per_page=50&customer_id=${customerId}&sort_by=invoice_due_date&filter=unpaid`);
   }
 }
 

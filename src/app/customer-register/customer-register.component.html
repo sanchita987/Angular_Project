@@ -400,8 +400,8 @@
         </div>
 
         <br />
-        <button type="button" class="btn btn-info" (click)="onregister()"
-            [disabled]="!customer_registerForm.valid">Save</button>
+        <button type="button" class="btn btn-primary" (click)="onregister()"
+            [disabled]="!customer_registerForm.valid" style="width: 200px;">Save</button>
 
         <div *ngIf="customer_registerResponse" class="alert alert-success">
             Registration successful!

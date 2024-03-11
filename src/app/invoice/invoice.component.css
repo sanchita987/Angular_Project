@@ -1,0 +1,21 @@
+thead th {
+    top: 0;
+    background-color: #FAFAFA;
+  }
+  
+  table th {
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+  
+  .table td,
+  .table th {
+    border: none;
+  }
+  .no-wrap {
+    white-space: nowrap;
+  }
+  .table  tr {
+    border-bottom: 1px solid #ececec; 
+    padding:15px !important;
+  }

@@ -34,5 +34,46 @@
   {
     z-index: 500;
   } 
-
+  thead th {
+    top: 0;
+    background-color: #FAFAFA;
+  }
+  
+  table th {
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+  
+  .table td,
+  .table th {
+    border: none;
+  }
+  .dropdown-toggle {
+    border: none !important;
+    background-color: transparent !important;
+  }
+  
+  .dropdown-icon {
+    cursor: pointer;
+  }
+  
+  .dropdown-toggle .fas {
+    display: none;
+  }
+  .search-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #aaa;
+    pointer-events: none; 
+  }
+  .form-control {
+    padding-left: 30px;
+  }
+  .table  tr {
+    border-bottom: 1px solid #ececec;
+    padding:15px;
+  }
+  
   
