@@ -6,10 +6,10 @@
         <div class="row">
           <div class="form-outline mb-2 col">
             <label class="selectCustomer required" for="selectCustomer" name="selectCustomer">Select Customer </label>
-            <input matInput id="selectCustomer" placeholder="Select Customer" formControlName="customer_name"
+            <input matInput id="selectCustomer" placeholder="Select Customer" formControlName="customer_id"
               class="form-control form-control-lg w-50" [matAutocomplete]="customerAuto"
               (input)="filterCustomers($event)">
-            <mat-autocomplete #customerAuto="matAutocomplete" (optionSelected)="updateInfo($event)">
+            <mat-autocomplete #customerAuto="matAutocomplete" (optionSelected)="updateInfo($event)" >
               <mat-option *ngFor="let customer of filteredCustomers" [value]="customer.first_name">
                 {{ customer.first_name }}
               </mat-option>
@@ -26,12 +26,12 @@
           </div>
           <div class="form-outline mb-2 col">
             <label class="selectCustomer required" for="paymentdate" name="paymentdate">Payment Date </label>
-            <input id="paymentdate" placeholder="Payment Date" formControlName="paymentdate"
-              class="form-control form-control-lg" type="date">
+            <input id="paymentdate" placeholder="Payment Date" formControlName="paid_at"
+              class="form-control form-control-lg" type="datetime-local">
           </div>
           <div>
             <input type="checkbox" id="fullAmountReceivedCheckbox" name="fullAmountReceived"
-              formControlName="amount_received" (change)="onCheckboxChange($event)">
+              formControlName="amount_received" (change)="checkedBox($event)">
             <label for="fullAmountReceivedCheckbox" class="ml-1"> Received full amount<span
                 *ngIf="amountReceived !== undefined">(¥ {{ amountReceived }})</span>
             </label>
@@ -42,7 +42,7 @@
         <div class="row">
           <div class="form-outline mb-2 col">
             <label class="payment_mode required" for="payment_mode" name="payment_mode">Mode of Payment </label>
-            <input matInput id="payment_mode" placeholder="Payment Mode" formControlName="payment_mode"
+            <input matInput id="payment_mode" placeholder="Payment Mode" formControlName="mode"
               class="form-control form-control-lg" [matAutocomplete]="paymentAuto">
             <mat-autocomplete #paymentAuto="matAutocomplete">
               <mat-option *ngFor="let payment of payments" [value]="payment.mode">
@@ -71,9 +71,11 @@
           <div class="form-outline mb-2 col">
             <label>Apply to invoices immediately ?</label>
             <div>
-              <input type="radio" id="applyImmediatelyYes" name="applyImmediately" value="Yes" class="ml-1">
+              <input type="radio" id="applyImmediatelyYes" name="apply_to_invoices" value="Yes" class="ml-1"
+                formControlName="apply_to_invoices">
               <label for="applyImmediatelyYes" class="ml-1">Yes</label>
-              <input type="radio" id="applyImmediatelyNo" name="applyImmediately" value="No" class="ml-1">
+              <input type="radio" id="applyImmediatelyNo" name="apply_to_invoices" value="No" class="ml-1"
+                formControlName="apply_to_invoices">
               <label for="applyImmediatelyNo" class="ml-1">No</label>
             </div>
           </div>
@@ -86,7 +88,7 @@
           </div>
           <table class="table ">
             <thead>
-            <tr>
+              <tr>
                 <th scope="col">Date</th>
                 <th scope="col">Invoice Number</th>
                 <th scope="col">Invoice Amount</th>
@@ -95,37 +97,43 @@
 
               </tr>
             </thead>
-            <tbody>
-              <tr *ngFor="let invoice of invoices; let i = index;">
-                <td>{{ invoice.invoice_date }}</td>
-                <td>{{ invoice.number }}</td>
-                <td>{{ invoice.total }}</td>
-                <td>{{ invoice.due_amount }}</td>
-                <td>
-                  <input type="text" aria-placeholder="amount" aria-label="amount" class="form-control w-50"  formControlName="new_amount{{i}}">
-                </td>
-              </tr>
+            <tbody formArrayName="invoices">
+              <ng-container *ngFor="let invoiceFormGroup of invoices.controls; let i = index">
+                <tr [formGroupName]="i">
+                  <td>{{ invoice[i].invoice_date }}</td>
+                  <td>{{ invoice[i].number }}</td>
+                  <td>{{ invoice[i].total }}</td>
+                  <td>{{ invoice[i].due_amount }}</td>
+                  <td>
+                    <input type="text" formControlName="amount" placeholder="New Amount">
+                    <div *ngIf="invoiceFormGroup.get('amount')?.hasError('amountExceedsDue')"
+                      class="alert alert-danger">
+                      The payment must be less than due amount
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
             </tbody>
           </table>
           <div class="amount-container p-5">
             <p class="text-right  pb-5">Sub total:{{totalDueAmount}}</p>
             <p class="text-right">Amount Received: {{ paymentForm.get('amount')?.value }}</p>
-            <p class="text-right">Amount used for Payments::{{totalDueAmount}}</p>
+            <p class="text-right">Amount used for Payments:{{totalDueAmount}}</p>
             <p class="text-right">Amount in excess: {{ calculateAmountInExcess() }}</p>
-        </div>
+          </div>
         </div>
       </div>
       <div class="form-group">
         <div class="row">
           <div class="form-outline mb-2 col">
-            <input type="checkbox" id="payment" name="paymment">
-            <label for="payment" class="ml-1 ">Email a “thank you” note for this payment</label>
+            <input type="checkbox" id="send_mail" name="send_mail" formControlName="send_mail">
+            <label for="send_mail" class="ml-1 ">Email a “thank you” note for this payment</label>
           </div>
         </div>
       </div>
       <div class="form-group">
         <button type="button" class="btn btn-light btn-lg ml-2">Cancel</button>
-        <button type="submit" class="btn btn-primary btn-lg">Save</button>
+        <button type="submit" class="btn btn-primary btn-lg" (click)="onSubmit()">Save</button>
       </div>
     </form>
   </div>

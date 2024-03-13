@@ -33,6 +33,9 @@ getCusto(customerName: string, page: number): Observable<any> {
   getInvoiceByCustomerId(customerId: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}invoice?page=1&per_page=50&customer_id=${customerId}&sort_by=invoice_due_date&filter=unpaid`);
   }
+  savePayment(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}payment`, data);
+  }
 }
 
 
