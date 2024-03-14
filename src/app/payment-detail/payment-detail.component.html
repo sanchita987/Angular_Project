@@ -1,0 +1,84 @@
+<div class="row mt-5">
+    <div class="col-md-4 table-responsive border ml-4">
+        <div class="payment-table ml-2 mt-4">
+            <h2>Payments</h2>
+            <div *ngFor="let item of payments" class="">
+                <div class="payment-info d-flex justify-content-between border-bottom mt-3">
+                    <div class="col">
+                        <p class="text-start"><strong>{{ item.customer?.first_name }}</strong></p>
+                        <p class="text-start fw-light" >{{ item.paid_at }}</p>
+                    </div>
+                    <div class="col">
+                        <p class="text-end"><strong>¥{{ item.amount }}</strong></p>
+                        <p class="text-end fw-light">cash</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 m-5">
+        <h1><img src="assets/images/left-arrow.png" routerLink="/admin/payment" class="custom-img mr-4" alt="left-arrow"><strong>{{ payment.customer?.first_name }} {{ payment.customer?.last_name }}</strong></h1>
+        <div class="border rounded p-5">
+            <h2>NEW IT VENTURE CORPORATION</h2>
+            <p class="fw-light">Kopo Yamato Bldg 2F, Tateishi 5-24-8 <br> Katsushika-Ku, Tokyo 124-0012</p>
+            <h3 class=" mt-5 text-center"><strong>PAYMENT RECEIPT</strong></h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-4">
+                        <h5><strong>Billed To:</strong></h5>
+                        <p><strong>{{ payment.customer?.first_name }} {{ payment.customer?.last_name }}</strong></p>
+                        <p class="fw-light"> {{ payment.customer?.email }}</p>
+                        <p class="fw-light"> {{ payment.customer?.phone }}</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="border ml-5">
+                        <h4 class="text-center">Payment Received</h4>
+                        <div class="text-center">
+                            <h1>¥{{ payment.amount}}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col">
+                    <div class="d-flex flex-nowrap border">
+                        <div class="order-1 p-2 border-left"><p class="fw-light">Payment Date</p><br><strong>{{ payment.paid_at }}</strong></div>
+                        <div class="order-2 p-2 border-left"><p>Payment Number</p><br><strong>{{ payment.payment_number }}</strong></div>
+                        <div class="order-3 p-2 border-left"><p>Payment Mode</p><br><strong>{{ payment.mode}}</strong></div>
+                        <div class="order-4 p-2 border-left">  <p>Received From</p><br><strong>{{ payment.customer?.first_name }} {{payment.customer?.last_name }}</strong>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <table class="table mt-4">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Invoice No</th>
+                                <th scope="col">Invoice Date</th>
+                                <th scope="col">Invoice Amount</th>
+                                <th scope="col">Payment Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let invoice of invoices;let i=index">
+                                <td>{{ i + 1}}</td>
+                                <td>{{ invoice.number}}</td>
+                                <td>{{ invoice.invoice_date}}</td>
+                                <td>{{ invoice.total}}</td>
+                                <td>{{ invoice.total}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            <p>Email a “thank you” note for this payment</p>
+            <div class="text-center mt-4">
+                <button class="btn mr-2">Download</button>
+                <button class="btn btn-primary mr-2">Send Receipt</button>
+            </div>
+        </div>
+    </div>
+</div>

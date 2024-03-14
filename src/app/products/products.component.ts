@@ -1,10 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
-import { RouterModule, ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../product.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule, Validators } from '@angular/forms';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 declare const $: any;
@@ -41,7 +41,7 @@ export class ProductsComponent {
   filterData(e: any) {
     console.log(e.target.value)
     this.filter = e.target.value;
-        this.loadPorudcts()
+    this.loadPorudcts()
   }
 
   search = ''
@@ -52,7 +52,7 @@ export class ProductsComponent {
   }
 
   loadPorudcts() {
-    this.data.getProduct(this.filter,this.search)
+    this.data.getProduct(this.filter, this.search)
       .subscribe({
         next: (response: any) => {
           console.log(response, "response")
@@ -76,7 +76,7 @@ export class ProductsComponent {
   openModal(product: any) {
     this.product_id = ''
     this.productForm.reset()
-    this.productForm.patchValue({status:1})
+    this.productForm.patchValue({ status: 1 })
     $('#exampleModalLong').modal('show');
   }
 

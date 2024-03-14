@@ -1,5 +1,11 @@
-<div class="mt-20  ml-auto mr-auto">
-    <h2 class="text-uppercase text-center mb-5"><b>Create a customer account</b></h2>
+<div class="mt-5   mr-auto">
+    <div class="row align-items-center justify-content-end p-0">
+        <div class="col-auto mr-auto mt-2 ">
+            <div class="form-group-0">
+              <h2><img src="assets/images/left-arrow.png" routerLink="/admin/customer" class="custom-img mr-4" alt="left-arrow"><b>Add Customer</b></h2>
+            </div>
+          </div>
+          </div>
 
     <form [formGroup]="customer_registerForm">
         <div *ngIf="errorResponse">

@@ -1,98 +1,111 @@
-<div class="card ml-auto mr-auto mt-20" >
-    <div class="card-body">
-        <div class="container mb-5 mt-3">
-            <div class="row d-flex align-items-baseline">
-                <div class="col-xl-9">
-                    <p style="color: #000000;font-size: 20px;">Invoice ID: {{invoice.number}}</p>
-                </div>
-                <hr>
-            </div>
-
-            <div class="container">
-                <div class="col-md-12">
-                    <div class="text-center">
-                        <h5 style="color:#3ea4c0 ;"><strong>INVOICE</strong></h5>
-                        <p class="pt-0">nitvcrm.com</p>
+<div class="row mt-5">
+    <div class="col-md-4 table-responsive border ml-4">
+        <div class="payment-table ml-2 mt-4">
+            <h2>Invoices</h2>
+            <div *ngFor="let item of invoices" class="">
+                <div class="payment-info d-flex justify-content-between border-bottom mt-3">
+                    <div class="col">
+                        <p class="text-start"><strong>{{ item.number }}</strong></p>
+                        <p class="text-start fw-light">{{ item.invoice_date }}</p>
                     </div>
-
-                </div>
-
-
-                <div class="row">
-                    <div class="col-xl-8">
-                        <ul class="list-unstyled">
-                            <li class="text-muted">To:<span class="text-uppercase" style="color:#3ea4c0 ;">{{invoice.customer.first_name}}
-                                    {{invoice.customer.last_name}}</span></li>
-                            <li class="text-muted"><i class="fa fa-map-marker" aria-hidden="true"></i>{{invoice.customer.address}} City</li>
-                            <li class="text-muted"><i class="fa fa-envelope-o" aria-hidden="true"></i>{{invoice.customer.email}}</li>
-                            <li class="text-muted"><i class="fas fa-phone"></i> {{invoice.customer.mobile}}</li>
-                        </ul>
-                    </div>
-                    <div class="col-xl-4">
-                        <p class="text-muted">Invoice</p>
-                        <ul class="list-unstyled">
-                            <li class="text-muted"><span
-                                    class="fw-bold">ID:</span>{{invoice.number}}</li>
-                            <li class="text-muted"> <span
-                                    class="fw-bold">Creation Date: </span>{{invoice.created_at}}</li>
-                            <li class="text-muted"> <span
-                                    class="me-1 fw-bold">Status:</span><span
-                                    class="badge bg-warning text-black fw-bold">
-                                    {{invoice.status}}</span></li>
-                        </ul>
+                    <div class="col">
+                        <p class="text-end"><strong>¥{{ item.total }}</strong></p>
+                        <p class="text-end fw-light">{{item.status_description}}</p>
                     </div>
                 </div>
-
-                <div class="row my-2 mx-1 justify-content-center">
-                    <table class="table table-striped table-borderless">
-                        <thead style="background-color:#3ea4c0 ;" class="text-white">
-                            <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Qty</th>
-                                <th scope="col">Unit Price</th>
-                                <th scope="col">Tax rate</th>
-                                <th scope="col">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let charge of charges">
-                                <td>{{ charge.name }}</td>
-                                <td>{{ charge.description }}</td>
-                                <td>{{ charge.quantity }}</td>
-                                <td>{{ charge.unit_price }}</td>
-                                <td>{{ charge.tax_rate }}</td>
-                                <td>{{ charge.total }}</td>
-                            </tr>
-
-                        </tbody>
-
-                    </table>
-                </div>
-                <div class="row">
-                    <div class="col-xl-8">
-                        <p class="ms-3">Add additional notes and payment information</p>
-
-                    </div>
-                    <div class="col-xl-3">
-                        <ul class="list-unstyled">
-                            <li class="text-muted ms-3"><span class="text-black me-4">SubTotal:</span>{{invoice.sub_total}}</li>
-                            <li class="text-muted ms-3 mt-2"><span class="text-black me-4">Total discount:</span>{{invoice.total_discount}}</li>
-                            <li class="text-muted ms-3 mt-2"><span class="text-black me-4">Tax amount:</span>{{invoice.total_tax_amount}}</li>
-                        </ul>
-                        <p class="text-black float-start"><strong><span class="text-black me-3">Total:</span>{{invoice.total}}</strong></p>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-xl-10">
-                        <p>Thank you for your purchase</p>
-                    </div>
-                    
-                </div>
-
             </div>
         </div>
     </div>
+    <div class="col-md-6 m-5">
+        <p style="color: #000000;font-size: 20px;"><img src="assets/images/left-arrow.png" routerLink="/admin/invoice" class="custom-img mr-4" alt="left-arrow">{{invoice.number}}</p>
+
+        <div class="container border p-5">
+            <div class="col-md-12">
+                <div class="text-center">
+                    <h5 style="color:#3ea4c0 ;"><strong>INVOICE</strong></h5>
+                    <p class="pt-0">nitvcrm.com</p>
+                </div>
+
+            </div>
+
+
+            <div class="row">
+                <div class="col-xl-8">
+                    <ul class="list-unstyled">
+                        <li class="text-muted">To:<span class="text-uppercase"
+                                style="color:#3ea4c0 ;">{{invoice.customer.first_name}}
+                                {{invoice.customer.last_name}}</span></li>
+                        <li class="text-muted"><i class="fa fa-map-marker"
+                                aria-hidden="true"></i>{{invoice.customer.address}} City</li>
+                        <li class="text-muted"><i class="fa fa-envelope-o"
+                                aria-hidden="true"></i>{{invoice.customer.email}}</li>
+                        <li class="text-muted"><i class="fas fa-phone"></i> {{invoice.customer.mobile}}</li>
+                    </ul>
+                </div>
+                <div class="col-xl-4">
+                    <p class="text-muted">Invoice</p>
+                    <ul class="list-unstyled">
+                        <li class="text-muted"><span class="fw-bold">ID:</span>{{invoice.number}}</li>
+                        <li class="text-muted"> <span class="fw-bold">Creation Date: </span>{{invoice.created_at}}</li>
+                        <li class="text-muted"> <span class="me-1 fw-bold">Status:</span><span
+                                class="badge bg-warning text-black fw-bold">
+                                {{invoice.status}}</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row my-2 mx-1 justify-content-center">
+                <table class="table table-striped table-borderless">
+                    <thead style="background-color:#3ea4c0 ;" class="text-white">
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Qty</th>
+                            <th scope="col">Unit Price</th>
+                            <th scope="col">Tax rate</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let charge of charges">
+                            <td>{{ charge.name }}</td>
+                            <td>{{ charge.description }}</td>
+                            <td>{{ charge.quantity }}</td>
+                            <td>{{ charge.unit_price }}</td>
+                            <td>{{ charge.tax_rate }}</td>
+                            <td>{{ charge.total }}</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-xl-8">
+                    <p class="ms-3">Add additional notes and payment information</p>
+
+                </div>
+                <div class="col-xl-3">
+                    <ul class="list-unstyled">
+                        <li class="text-muted ms-3"><span class="text-black me-4">SubTotal:</span>{{invoice.sub_total}}
+                        </li>
+                        <li class="text-muted ms-3 mt-2"><span class="text-black me-4">Total
+                                discount:</span>{{invoice.total_discount}}</li>
+                        <li class="text-muted ms-3 mt-2"><span class="text-black me-4">Tax
+                                amount:</span>{{invoice.total_tax_amount}}</li>
+                    </ul>
+                    <p class="text-black float-start"><strong><span
+                                class="text-black me-3">Total:</span>{{invoice.total}}</strong></p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-xl-10">
+                    <p>Thank you for your purchase</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
 </div>
-<a routerLink="/admin/invoice" class="btn btn-info" style=" position: sticky; bottom: 0;">Back</a>

@@ -14,13 +14,13 @@ export class SubscriptionsComponent {
   subscription : any = {
     data: { items: [] }
   };
-constructor(private data: SubscriptionService , private subscriptionService : SubscriptionService ) {
+constructor(private data: SubscriptionService , ) {
   this.getsubscription();
 }
 getsubscription() {
   this.data.getsubscription(this.search, this.filter)
-    .subscribe(
-      (response: any) => {
+    .subscribe({
+      next: (response: any) => {
         console.log(response, "response")
         if (response && response.data && response.data.items) {
           this.subscription.data.items = response.data.items;
@@ -28,21 +28,23 @@ getsubscription() {
           console.error('Subscription data is missing or in unexpected format.');
         }
       },
-      (error) => {
+      error: (error) => {
         if (error.status === 404) {
           console.error('Subscription not found. Redirect or show a message.');
         } else {
           console.error('An error occurred:', error);
         }
       }
-    );
+    });
 }
+
 search = ''
   searchData(e: any) {
     console.log(e.target.value)
     this.search = e.target.value;
     this.getsubscription()
   }
+  
   filter = 'live'
   filterData(e: any) {
     console.log(e.target.value)

@@ -56,9 +56,15 @@
     height: 25px; width: 25px;
     color: transparent;
   }
-  .nav-images{
-    display: flex; align-items: center;
-  }
+  .nav-images {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    width: 83%; 
+    background-color: white; 
+    z-index: 999; 
+}
+
   .images{
     display: flex;  align-items: center; margin-left: auto;
   }

@@ -3,14 +3,14 @@ import { PaymentService } from '../payment.service';
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, FormArray } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AbstractControl } from '@angular/forms';
 
 
 @Component({
   selector: 'app-create-payment',
   standalone: true,
-  imports: [MatAutocompleteModule, CommonModule, ReactiveFormsModule,],
+  imports: [MatAutocompleteModule, CommonModule, ReactiveFormsModule,RouterModule],
   templateUrl: './create-payment.component.html',
   styleUrl: './create-payment.component.css'
 })
@@ -22,10 +22,10 @@ export class CreatePaymentComponent {
   customers: any = [];
   filteredCustomers: any = [];
   invoice: any[] = [];
+  checkboxChecked: boolean = false;
   optionSelected: boolean = false;
   hasInvoices: boolean = false;
   amountReceived: number | undefined;
-  isCheckboxChange: boolean = false;
   constructor(
     private data: PaymentService,
     private router: Router,
@@ -62,7 +62,7 @@ export class CreatePaymentComponent {
   addInvoice(invoice: any) {
     const dueAmount = invoice.due_amount;
     const invoiceId = invoice.id;
-  
+
     const validateAmount = (id: number) => {
       return (control: AbstractControl): { [key: string]: any } | null => {
         const amount = control.value;
@@ -72,7 +72,7 @@ export class CreatePaymentComponent {
         return null;
       };
     };
-  
+
     const invoiceForm = this.fb.group({
       id: [invoiceId],
       amount: [
@@ -81,12 +81,10 @@ export class CreatePaymentComponent {
       ],
       due_amount: [invoice.due_amount]
     });
-  
+
     (this.paymentForm.get('invoices') as FormArray).push(invoiceForm);
   }
-  
-  
-  
+
   loadCustomers() {
     const customerName = '';
     let allCustomers: any[] = [];
@@ -119,7 +117,7 @@ export class CreatePaymentComponent {
     this.optionSelected = true;
     const selectedCustomerName = event.option.value;
     const selectedCustomer = this.filteredCustomers.find((customer: any) => customer.first_name === selectedCustomerName);
-  
+
     if (selectedCustomer) {
       this.amountReceived = selectedCustomer.total_due_amount;
       this.paymentForm.patchValue({
@@ -137,7 +135,7 @@ export class CreatePaymentComponent {
       });
     }
   }
-  
+
   checkedBox($event: any) {
     this.invoices.controls.forEach((element: any) => {
       const dueAmount = element.get('due_amount').value;
@@ -149,7 +147,6 @@ export class CreatePaymentComponent {
   updateAmount() {
     const checkboxChecked = true;
     const amountControl = this.paymentForm.get('amount');
-
     if (checkboxChecked) {
       const amountReceived = this.amountReceived ?? 0;
       amountControl?.patchValue(amountReceived);
@@ -169,7 +166,7 @@ export class CreatePaymentComponent {
       console.log("due amount of the invoice", this.totalDueAmount)
     });
   }
- 
+
   calculateTotalDueAmount(): void {
     this.totalDueAmount = 0;
     this.invoice.forEach((invoice) => {
@@ -178,7 +175,7 @@ export class CreatePaymentComponent {
     });
 
   }
-clearNewAmount(): void {
+  clearNewAmount(): void {
     for (const controlName of Object.keys(this.paymentForm.controls)) {
       if (controlName.startsWith('new_amount')) {
         this.paymentForm.removeControl(controlName);
@@ -195,23 +192,26 @@ clearNewAmount(): void {
     let totalDueAmount = 0;
     let remainingAmount = amountReceived;
 
-    this.invoices.controls.forEach((control: any, index: number) => {
-      const dueAmount = this.invoice[index].due_amount || 0;
-      const controlName = 'inv.' + index + '.amount';
+    const invoiceControls = this.invoices.controls;
+    const invoiceData = this.invoice;
 
-      if (remainingAmount >= dueAmount) {
-        this.paymentForm.get(controlName)?.patchValue(dueAmount);
-        remainingAmount -= dueAmount;
-        totalDueAmount += dueAmount;
-      } else {
-        this.paymentForm.get(controlName)?.patchValue(remainingAmount);
-        totalDueAmount += remainingAmount;
-        remainingAmount = 0;
-      }
-    });
+    for (let index = 0; index < invoiceControls.length; index++) {
+      const control = invoiceControls[index];
+      const dueAmount = invoiceData[index].due_amount || 0;
+      const controlName = `invoice.${index}.amount`;
+      const patchValue = Math.min(remainingAmount, dueAmount);
+
+      control.get(controlName)?.patchValue(patchValue);
+      totalDueAmount += patchValue;
+      remainingAmount -= patchValue;
+
+      if (remainingAmount <= 0) break;
+    }
+
     this.totalDueAmount = totalDueAmount;
     return totalDueAmount;
   }
+
 
   onSubmit(): void {
     const formData = this.paymentForm.value;
@@ -219,6 +219,7 @@ clearNewAmount(): void {
       next: (response) => {
         console.log('Response from API:', response);
         this.paymentForm.reset();
+        this.router.navigate(['admin/payment']);
       },
       error: (error) => {
         console.error('Error while posting data:', error);
@@ -232,29 +233,9 @@ clearNewAmount(): void {
     });
   }
 
-  get customer_id() {
-    return this.paymentForm.get('customer_name');
-  }
-  get mode() {
-    return this.paymentForm.get('mode');
-  }
-  get reference() {
-    return this.paymentForm.get('reference');
-  }
-  get description() {
-    return this.paymentForm.get('description');
-  }
-  get amount() {
-    return this.paymentForm.get('amount');
-  }
-  get amount_received() {
-    return this.paymentForm.get('amount_received');
-  }
-  get send_mail() {
-    return this.paymentForm.get('send_mail');
-  }
-  get apply_to_invoices() {
-    return this.paymentForm.get('apply_to_invoices');
+
+  getFormControl(controlName: string) {
+    return this.paymentForm.get(controlName);
   }
   get invoices(): FormArray {
     return this.paymentForm.get('invoices') as FormArray;

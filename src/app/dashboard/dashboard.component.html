@@ -1,7 +1,7 @@
 <div class="row mt-5">
   <div class="col-md-7">
     <div class="table-responsive bg-white ">
-      <div class="box mb-2">
+      <div class="box mt-3 mb-2">
       <h5 class="custome-heading"><b>Plan summary</b></h5>
         <table class="table mb-0 mb-4">
           <thead>
@@ -19,11 +19,9 @@
         </table>
         </div>
       </div>
-      <div class="table-responsive bg-white">
-    <table class="table mb-0 mb-4 h-50">
-      <div class="box">
-        <h5 class="custome-heading"><b>Subscription summary</b></h5>
-        <thead>
+      <h5 class="custome-heading"><b>Subscription summary</b></h5>
+    <table class="table table-responsive border mb-0 mb-4 h-50">
+        <thead class="sticky-top">
           <tr>
             <th scope="col">Date</th>
             <th scope="col">Signups</th>
@@ -39,11 +37,17 @@
           <td>{{post.cancellations}}</td>
           <td>{{post.customers}}</td>
         </tr>
-      </div>
     </table>
+          <div class="col-md-6">
+              <p class="fw-bold ml-0">Call us Mon-Fri</p>
+          </div>
+          <span class="mr-3 fw-bold"><img src="assets/images/japan.png" class="image" alt="Customer Image">08000856099</span>
+          <span class="mr-3 fw-bold"><img src="assets/images/nepal.png" class="small-image" alt="Customer Image">08000856099</span>
+          <span class="mr-3 fw-bold"><img src="assets/images/india.png" class="small-image" alt="Customer Image">08000856099</span>
+          <span class="mr-3 fw-bold"><img src="assets/images/singapour.png" class="small-image" alt="Customer Image">08000856099</span>
+          
   </div>
-  </div>
-  <div class="col-md-4">
+  <div class="col-md-4 mt-3">
     <div class="row mb-3 ">
       <div class="col-md-6">
         <div class="box" style="background-color:#f1f2ff; height:200px; width:200px;">
@@ -110,9 +114,9 @@
           </tr>
         </thead>
         <tbody>
-          <td><b>{{sign?.today}}</b></td>
-          <td><b>{{sign?.yesterday}}</b></td>
-          <td><b>{{sign?.this_month}}</b></td>
+          <td><b class="fs-1">{{sign?.today}}</b></td>
+          <td><b class="fs-1">{{sign?.yesterday}}</b></td>
+          <td><b class="fs-1">{{sign?.this_month}}</b></td>
 
 
         </tbody>
@@ -120,4 +124,5 @@
       </div>
     </div>
 
+  </div>
   </div>

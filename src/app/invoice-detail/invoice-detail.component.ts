@@ -11,6 +11,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
   styleUrl: './invoice-detail.component.css'
 })
 export class InvoiceDetailComponent {
+invoices: any[] = [];
   charges: any[] = [];
   invoice: any = {
     data: []
@@ -26,6 +27,22 @@ export class InvoiceDetailComponent {
         this.charges = this.invoice.charges;
       })
     })
+    this.fetchInvoices();
+  }
+  fetchInvoices() {
+ this.data.getInvoice(this.data).subscribe({
+      next: (response: any) => {
+        if (response.status) {
+          this.invoices = response.data.items;
+          console.log('Invoices:', this.invoices);
+        } else {
+          console.error('Error fetching payments:', response.message);
+        }
+      },
+      error: (error) => {
+        console.error('Error fetching payments:', error);
+      }
+    });
   }
 
 }

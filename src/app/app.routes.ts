@@ -31,6 +31,7 @@ import { CreatePaymentComponent } from './create-payment/create-payment.componen
 import { CreateTaxComponent } from './create-tax/create-tax.component';
 import { createSubscriptionComponent } from './create-subscription/create-subscription.component';
 import {materialmodule} from './materials-module.service'
+import { PaymentDetailComponent } from './payment-detail/payment-detail.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -49,12 +50,13 @@ export const routes: Routes = [
             { path: 'subscriptions', component: SubscriptionsComponent },
            { path: 'customer/:id/update', component: CustomerUpdateComponent },
             { path: 'user', component: UserComponent },
+            { path: 'payment', component: PaymentComponent },
+            { path: 'payment/:id', component: PaymentDetailComponent },
             { path: 'create-payment', component: CreatePaymentComponent},
             { path: 'create-tax', component: CreateTaxComponent},
             { path: 'create-subscription', component: createSubscriptionComponent },
             { path: 'products', component: ProductsComponent },
             { path: 'tax', component: TaxComponent },
-            { path: 'payment', component: PaymentComponent },
             { path: 'user-register', component: UserRegisterComponent },
             { path: 'user/:id', component: UserDetailComponent },
             { path: 'customer/:id', component: CustomerDetailComponent },

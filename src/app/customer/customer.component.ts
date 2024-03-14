@@ -2,10 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CustomerService } from '../customer.service';
-import { SharedModuleModule } from '../shared-module/shared-module.module';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { Router } from '@angular/router';
-import { FormGroup } from '@angular/forms';
 
 type Customer = {
   [key: string]: any;
@@ -39,18 +36,21 @@ export class CustomerComponent implements OnInit {
   ngOnInit() {
     this.loadCustomers();
   }
+
   search = ''
   searchData(e: any) {
     console.log(e.target.value)
     this.search = e.target.value;
     this.loadCustomers()
   }
+
   filter = 'all'
   filterData(e: any) {
     console.log(e.target.value)
     this.filter = e.target.value;
     this.loadCustomers()
   }
+
   loadCustomers() {
     this.data.getCustomers(this.currentPage, this.sortColumn, this.reverseSort ? 'desc' : 'asc', this.search, this.filter)
       .subscribe((response: any) => {
@@ -80,9 +80,7 @@ export class CustomerComponent implements OnInit {
     });
   }
 
-
-
-  loadNextPage() {
+loadNextPage() {
     this.currentPage++;
     this.loadCustomers();
   }

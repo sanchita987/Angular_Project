@@ -12,7 +12,7 @@ import { Subject } from 'rxjs';
 @Component({
   selector: 'app-create-subscription',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatAutocompleteModule],
+  imports: [CommonModule, ReactiveFormsModule, MatAutocompleteModule, RouterModule],
   templateUrl: './create-subscription.component.html',
   styleUrl: './create-subscription.component.css'
 })

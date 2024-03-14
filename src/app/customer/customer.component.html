@@ -1,6 +1,7 @@
 
 <!---serch buttons-->
-<div class="container mt-4">
+<div class="row mt-4 ml-2">
+<div class="container mt-5 ">
   <div class="row align-items-center justify-content-end p-0">
     <div class="col-auto mr-auto">
       <div class="form-group-0">
@@ -46,7 +47,7 @@
             <th scope="col" (click)="toggleSortOrder('first_name')" class="sortable-header">Name</th>
             <th scope="col" (click)="toggleSortOrder('email')" class="sortable-header pl-4px">Email</th>
             <th scope="col" (click)="toggleSortOrder('phone')" class="sortable-header">Phone</th>
-            <th scope="col" (click)="toggleSortOrder('total_due_amount')" class="sortable-header">Due amount</th>
+            <th scope="col" class="sortable-header">Due amount</th>
             <th scope="col" (click)="toggleSortOrder('excess_credit')" class="sortable-header">Excess Credit</th>
             <th scope="col" (click)="toggleSortOrder('is_active')" class="sortable-header">Status</th>
             <th scope="col">Action</th>
@@ -84,10 +85,11 @@
 
 
 <!-- Pagination and bootstrap -->
-<div class="pagination">
+<div class="pagination mt-3">
   <button (click)="loadPreviousPage()">Previous</button>
   <span *ngFor="let page of getPageNumbers()">
     <button (click)="loadPage(page)" [class.active]="currentPage === page">{{ page }}</button>
   </span>
   <button (click)="loadNextPage()">Next</button>
+</div>
 </div>
